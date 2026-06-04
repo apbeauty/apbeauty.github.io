@@ -639,7 +639,8 @@ body.edit-mode .add-block-placeholder {
 
     .text-block-content,
     .content-paragraph {
-        word-break: break-word !important;
+        word-break: keep-all !important;
+        overflow-wrap: break-word !important;
     }
     
     .content-header {
