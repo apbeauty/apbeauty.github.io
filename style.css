@@ -1039,10 +1039,10 @@ body.edit-mode .add-block-placeholder {
         margin: 0 -12.5% !important;
     }
     #block-block_mono_1 .visual-image-frame img {
-        width: 156% !important;
-        max-width: 156% !important;
+        width: 218% !important;
+        max-width: 218% !important;
         display: block !important;
-        margin: 0 -28% !important;
+        margin: 0 -59% !important;
     }
 
     /* Monogram System vertical margin and padding adjustments on mobile */
