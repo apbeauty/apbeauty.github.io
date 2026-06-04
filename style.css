@@ -1043,6 +1043,7 @@ body.edit-mode .add-block-placeholder {
         max-width: 90% !important;
         display: block !important;
         margin: 0 auto !important;
+        translate: 6.07% 0 !important;
     }
 
     /* Monogram System vertical margin and padding adjustments on mobile */
@@ -1745,6 +1746,7 @@ body.edit-mode .add-block-placeholder {
     #block-block_mono_1 .visual-image-frame img {
         width: 34% !important;
         margin: 0 auto !important;
+        translate: 6.07% 0 !important;
     }
 }
 
