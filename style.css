@@ -2398,8 +2398,12 @@ body.edit-mode .add-block-placeholder {
 
 .incorrect-label {
     position: absolute;
-    top: 10px;
+    top: 8px;
     left: 32px;
+    right: 8px;
+    height: 16px;
+    display: flex;
+    align-items: center;
     font-family: 'Noto Sans KR', sans-serif;
     font-size: 11px;
     font-weight: 300;
@@ -2432,8 +2436,12 @@ body.edit-mode .add-block-placeholder {
     .incorrect-label {
         font-size: 9.5px;
         left: 28px;
-        top: 10px;
-        line-height: 12px !important;
+        right: 6px;
+        top: 8px !important;
+        height: 16px !important;
+        display: flex !important;
+        align-items: center !important;
+        line-height: 11px !important;
         word-break: keep-all !important;
         overflow-wrap: break-word !important;
     }
