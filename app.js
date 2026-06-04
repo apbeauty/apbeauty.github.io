@@ -1351,9 +1351,9 @@ function renderBlockHTML(block, sectionId, index, totalBlocks) {
                     <div class="minimum-size-bracket"></div>
                     <!-- Dimension Labels -->
                     <div class="minimum-size-text">
-                        <span class="ms-printed">Printed: <strong>8mm</strong></span>
+                        <span class="ms-printed">Printed: 8mm</span>
                         <span class="ms-divider">&nbsp;|&nbsp;</span>
-                        <span class="ms-digital">Digital: <strong>23px</strong></span>
+                        <span class="ms-digital">Digital: 23px</span>
                     </div>
                 </div>
             </div>
