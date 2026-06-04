@@ -2093,7 +2093,7 @@ function renderBlockHTML(block, sectionId, index, totalBlocks) {
             `;
         } else if (block.id === 'block_slog_2') {
             visualContent = `
-                <div class="visual-image-frame visual-image-svg-box" style="padding: 24px; background-color: #ffffff;">
+                <div class="visual-image-frame visual-image-svg-box" style="padding: 24px 0; background-color: #ffffff;">
                     <svg viewBox="0 0 1007.63 240.36" style="width: 100%; height: auto; display: block; max-width: 810px; margin: 0 auto;">
                         <defs>
                             ${sloganMasterDefs}
@@ -2163,7 +2163,7 @@ function renderBlockHTML(block, sectionId, index, totalBlocks) {
             `;
         } else {
             visualContent = `
-                <div class="visual-image-frame visual-image-svg-box" style="padding: 24px; background-color: #ffffff;">
+                <div class="visual-image-frame visual-image-svg-box" style="padding: 24px 0; background-color: #ffffff;">
                     <svg viewBox="0 0 1009.57 426.15" style="width: 100%; height: auto; display: block; max-width: 810px; margin: 0 auto;">
                         <defs>
                             ${sloganMasterDefs}
