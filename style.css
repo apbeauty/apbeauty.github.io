@@ -1015,16 +1015,14 @@ body.edit-mode .add-block-placeholder {
     #block-block_wm_1 .visual-image-frame img {
         width: 104% !important;
         max-width: 104% !important;
-        position: relative !important;
-        left: 50% !important;
-        transform: translateX(-50%) !important;
+        display: block !important;
+        margin: 0 -2% !important;
     }
     #block-block_mono_1 .visual-image-frame img {
         width: 104% !important;
         max-width: 104% !important;
-        position: relative !important;
-        left: 50% !important;
-        transform: translateX(-50%) !important;
+        display: block !important;
+        margin: 0 -2% !important;
     }
 }
 
