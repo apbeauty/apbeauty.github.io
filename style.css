@@ -1480,9 +1480,9 @@ body.edit-mode .add-block-placeholder {
 }
 
 .minimum-size-bracket {
-    border-right: 1.5px solid #000000 !important;
-    border-top: 1.5px solid #000000 !important;
-    border-bottom: 1.5px solid #000000 !important;
+    border-right: 0.5px solid #000000 !important;
+    border-top: 0.5px solid #000000 !important;
+    border-bottom: 0.5px solid #000000 !important;
     width: 6px !important;
     height: 23px !important;
     box-sizing: border-box !important;
