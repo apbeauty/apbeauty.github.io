@@ -2431,7 +2431,9 @@ body.edit-mode .add-block-placeholder {
         font-size: 9.5px;
         left: 28px;
         top: 6px;
-        line-height: 16px;
+        line-height: 1.15 !important;
+        word-break: keep-all !important;
+        overflow-wrap: break-word !important;
     }
 
     .incorrect-preview {
