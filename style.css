@@ -2302,6 +2302,10 @@ body.edit-mode .add-block-placeholder {
         max-width: 420px;
         margin: 0 auto;
     }
+    .placements-grid .placement-item {
+        width: 80% !important;
+        margin: 0 auto !important;
+    }
 }
 
 /* Incorrect Usage Callout & Grid */
