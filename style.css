@@ -983,6 +983,27 @@ body.edit-mode .add-block-placeholder {
     .minimum-size-text .ms-divider {
         display: none !important;
     }
+
+    /* Wordmark System/Exclusion Zone vertical margin removal on mobile */
+    #block-block_wm_2 {
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+        gap: 0 !important;
+    }
+    #block-block_wm_2 .block-text-column {
+        margin-bottom: 0 !important;
+    }
+    #block-block_wm_2 .block-visual-column {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    #block-block_wm_2 .visual-image-svg-box {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    #block-block_wm_2_2 {
+        padding-top: 0 !important;
+    }
 }
 
 /* Hex badge highlights in text blocks */
@@ -1360,8 +1381,16 @@ body.edit-mode .add-block-placeholder {
 
 @media (max-width: 480px) {
     .typeface-grid {
-        grid-template-columns: 1fr;
-        gap: 16px;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px 12px;
+    }
+    .typeface-col-title {
+        font-size: 0.95rem !important;
+        margin-bottom: 8px !important;
+    }
+    .typeface-col-content {
+        font-size: 0.65rem !important;
+        line-height: 1.4 !important;
     }
 }
 
