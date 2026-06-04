@@ -2306,7 +2306,7 @@ body.edit-mode .add-block-placeholder {
 @media (max-width: 768px) {
     .placements-grid {
         grid-template-columns: 1fr !important;
-        gap: 36px !important;
+        gap: 18px !important;
         max-width: 420px;
         margin: 0 auto;
     }
