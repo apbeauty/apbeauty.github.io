@@ -698,16 +698,16 @@ function updateSliderMinScale(suffix = '') {
         baseWidth = 700; // default fallback
     }
     
-    // Core Monogram is constrained to 34% width on desktop, but 80% on mobile
+    // Core Monogram is constrained to 34% width on desktop, but 104% on mobile
     if (suffix.toLowerCase().includes('mono')) {
         const isMobile = window.innerWidth <= 768;
-        baseWidth = baseWidth * (isMobile ? 0.80 : 0.34);
+        baseWidth = baseWidth * (isMobile ? 1.04 : 0.34);
     }
-    // Core Wordmark is constrained to 80% width on mobile
+    // Core Wordmark is constrained to 104% width on mobile
     if (suffix.toLowerCase().includes('wm_1')) {
         const isMobile = window.innerWidth <= 768;
         if (isMobile) {
-            baseWidth = baseWidth * 0.80;
+            baseWidth = baseWidth * 1.04;
         }
     }
     

@@ -906,8 +906,8 @@ body.edit-mode .add-block-placeholder {
         padding-bottom: 1.5px !important;
     }
     .guide-block {
-        padding: 24px 0 !important;
-        gap: 18px !important;
+        padding: 29px 0 !important;
+        gap: 9px !important;
     }
     .content-paragraph {
         margin-bottom: 0.72rem !important;
@@ -963,7 +963,7 @@ body.edit-mode .add-block-placeholder {
     #block-block_mono_3 .visual-image-svg-box {
         width: 50% !important;
         margin: 0 auto !important;
-        aspect-ratio: 2.0245 !important;
+        aspect-ratio: 1.20 !important;
     }
     #block-block_mono_3 .visual-image-svg-box img {
         width: 100% !important;
@@ -1011,14 +1011,20 @@ body.edit-mode .add-block-placeholder {
         padding: 0 !important;
     }
 
-    /* CORE WORDMARK and CORE MONOGRAM occupies 80% width on mobile */
+    /* CORE WORDMARK and CORE MONOGRAM occupies 104% width on mobile with centering */
     #block-block_wm_1 .visual-image-frame img {
-        width: 80% !important;
-        margin: 0 auto !important;
+        width: 104% !important;
+        max-width: 104% !important;
+        position: relative !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
     }
     #block-block_mono_1 .visual-image-frame img {
-        width: 80% !important;
-        margin: 0 auto !important;
+        width: 104% !important;
+        max-width: 104% !important;
+        position: relative !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
     }
 }
 
