@@ -959,9 +959,9 @@ body.edit-mode .add-block-placeholder {
         gap: 8px !important;
     }
 
-    /* Monogram Exclusion Zone SVG occupies 50% width on mobile */
+    /* Monogram Exclusion Zone SVG occupies 85% width on mobile */
     #block-block_mono_3 .visual-image-svg-box {
-        width: 50% !important;
+        width: 85% !important;
         margin: 0 auto !important;
         aspect-ratio: 1.20 !important;
     }
@@ -1023,6 +1023,34 @@ body.edit-mode .add-block-placeholder {
         max-width: 104% !important;
         display: block !important;
         margin: 0 -2% !important;
+    }
+
+    /* Monogram System vertical margin and padding adjustments on mobile */
+    #block-block_mono_2 {
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+        gap: 0 !important;
+    }
+    #block-block_mono_2 .block-text-column {
+        margin-bottom: 0 !important;
+    }
+    #block-block_mono_2 .block-visual-column {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    #block-block_mono_2 .visual-image-svg-box {
+        width: 70% !important;
+        margin: 0 auto !important;
+        aspect-ratio: auto !important;
+        height: auto !important;
+        padding: 0 !important;
+    }
+    #block-block_mono_2 .visual-image-svg-box img {
+        position: relative !important;
+        width: 100% !important;
+        height: auto !important;
+        top: 0 !important;
+        left: 0 !important;
     }
 }
 
