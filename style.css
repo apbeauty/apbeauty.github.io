@@ -34,6 +34,8 @@ body, aside, main, header, footer, a, h1, h2, h3, p, table, tr, td, button, inpu
 /* Reset & Base Styles */
 html {
     font-size: 85%;
+    max-width: 100%;
+    overflow-x: hidden;
 }
 
 * {
@@ -50,6 +52,7 @@ body {
     font-weight: 400;
     line-height: 1.6;
     overflow-x: hidden;
+    max-width: 100%;
     -webkit-font-smoothing: antialiased;
 }
 
@@ -60,6 +63,7 @@ body {
     max-width: 1720px; /* sidebar width 235px + main content max-width 1485px */
     margin: 0 auto;
     width: 100%;
+    overflow-x: hidden;
 }
 
 /* Sidebar Navigation (Sharp, Editorial) */
@@ -908,6 +912,19 @@ body.edit-mode .add-block-placeholder {
     }
     #block-block_wm_2_2 .visual-image-svg-box {
         padding: 12px 0 !important; /* Align to the left on mobile by removing padding */
+    }
+
+    /* Interactive controls responsive layout on mobile */
+    .interactive-controls {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 12px !important;
+    }
+    .interactive-controls .slider-control-container {
+        width: 100% !important;
+    }
+    .interactive-controls .action-buttons-container {
+        justify-content: flex-end !important;
     }
 }
 
