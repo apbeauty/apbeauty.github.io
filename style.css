@@ -968,6 +968,20 @@ body.edit-mode .add-block-placeholder {
     input, select, textarea, .header-search-input, .search-bar-input {
         font-size: 16px !important;
     }
+
+    /* Wordmark Minimum Size responsive layout on mobile */
+    .minimum-size-container {
+        height: auto !important;
+    }
+    .minimum-size-text {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        white-space: normal !important;
+        gap: 2px !important;
+    }
+    .minimum-size-text .ms-divider {
+        display: none !important;
+    }
 }
 
 /* Hex badge highlights in text blocks */
