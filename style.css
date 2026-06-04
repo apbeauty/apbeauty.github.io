@@ -1634,12 +1634,12 @@ body.edit-mode .add-block-placeholder {
     #block-block_slog_4 .visual-image-svg-box svg {
         width: 100% !important;
     }
-    /* AP SLOGAN SVG width to 90% on mobile */
+    /* AP SLOGAN SVG width to 100% on mobile to eliminate horizontal spacing */
     #block-block_slog_1 .visual-image-svg-box,
     #block-block_slog_2 .visual-image-svg-box,
     #block-block_slog_3 .visual-image-svg-box,
     #block-block_slog_4 .visual-image-svg-box {
-        width: 90% !important;
+        width: 100% !important;
         margin: 0 auto !important;
     }
 }
