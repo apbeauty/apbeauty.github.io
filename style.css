@@ -959,11 +959,30 @@ body.edit-mode .add-block-placeholder {
         gap: 8px !important;
     }
 
-    /* Monogram Exclusion Zone SVG occupies 85% width on mobile */
+    /* Monogram Exclusion Zone SVG occupies 153% width on mobile with centering & padding removal */
+    #block-block_mono_3 {
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+        gap: 0 !important;
+    }
+    #block-block_mono_3 .block-text-column {
+        margin-bottom: 0 !important;
+    }
+    #block-block_mono_3 .content-paragraph:last-child {
+        margin-bottom: 0 !important;
+    }
+    #block-block_mono_3 .block-visual-column {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
     #block-block_mono_3 .visual-image-svg-box {
-        width: 85% !important;
+        width: 153% !important;
+        max-width: 153% !important;
         margin: 0 auto !important;
         aspect-ratio: 1.20 !important;
+        position: relative !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
     }
     #block-block_mono_3 .visual-image-svg-box img {
         width: 100% !important;
@@ -1032,6 +1051,9 @@ body.edit-mode .add-block-placeholder {
         gap: 0 !important;
     }
     #block-block_mono_2 .block-text-column {
+        margin-bottom: 0 !important;
+    }
+    #block-block_mono_2 .content-paragraph:last-child {
         margin-bottom: 0 !important;
     }
     #block-block_mono_2 .block-visual-column {
