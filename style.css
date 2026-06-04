@@ -615,7 +615,7 @@ body.edit-mode .add-block-placeholder {
 
     .main-content {
         margin-left: 0;
-        padding: 24px 12px !important;
+        padding: 24px 16px !important;
         padding-top: calc(var(--header-height) + 19px) !important;
         width: 100% !important;
         max-width: 100% !important;

@@ -2094,18 +2094,18 @@ function renderBlockHTML(block, sectionId, index, totalBlocks) {
         } else if (block.id === 'block_slog_2') {
             visualContent = `
                 <div class="visual-image-frame visual-image-svg-box" style="padding: 24px; background-color: #ffffff;">
-                    <svg viewBox="0 0 1068.13 240.36" style="width: 100%; height: auto; display: block; max-width: 810px; margin: 0 auto;">
+                    <svg viewBox="0 0 1007.63 240.36" style="width: 100%; height: auto; display: block; max-width: 810px; margin: 0 auto;">
                         <defs>
                             ${sloganMasterDefs}
                         </defs>
                         <!-- Center dashed alignment line -->
-                        <line x1="520.44" y1="0" x2="520.44" y2="202.79" stroke="#000000" stroke-dasharray="6 6" stroke-width="0.5px" fill="none" opacity="0.3" />
+                        <line x1="490.19" y1="0" x2="490.19" y2="202.79" stroke="#000000" stroke-dasharray="6 6" stroke-width="0.5px" fill="none" opacity="0.3" />
                         
                         <!-- Horizontal guidelines -->
-                        <line x1="135.12" y1="46.85" x2="901.77" y2="46.85" stroke="#02060f" stroke-width="0.5px" fill="none" opacity="0.3" />
-                        <line x1="135.12" y1="100.81" x2="901.77" y2="100.81" stroke="#02060f" stroke-width="0.5px" fill="none" opacity="0.3" />
-                        <line x1="135.12" y1="127.85" x2="901.77" y2="127.85" stroke="#02060f" stroke-width="0.5px" fill="none" opacity="0.3" />
-                        <line x1="135.12" y1="154.89" x2="901.77" y2="154.89" stroke="#02060f" stroke-width="0.5px" fill="none" opacity="0.3" />
+                        <line x1="135.12" y1="46.85" x2="841.27" y2="46.85" stroke="#02060f" stroke-width="0.5px" fill="none" opacity="0.3" />
+                        <line x1="135.12" y1="100.81" x2="841.27" y2="100.81" stroke="#02060f" stroke-width="0.5px" fill="none" opacity="0.3" />
+                        <line x1="135.12" y1="127.85" x2="841.27" y2="127.85" stroke="#02060f" stroke-width="0.5px" fill="none" opacity="0.3" />
+                        <line x1="135.12" y1="154.89" x2="841.27" y2="154.89" stroke="#02060f" stroke-width="0.5px" fill="none" opacity="0.3" />
                         
                         <!-- Brackets on the left -->
                         <polyline points="96.61 102.01 61.24 102.01 61.24 127.85 96.61 127.85" stroke="#ed1c24" stroke-width="0.8px" fill="none" />
@@ -2118,12 +2118,12 @@ function renderBlockHTML(block, sectionId, index, totalBlocks) {
                         <text x="26" y="145" fill="#ed1c24" font-family="var(--font-en)" font-size="16px" font-weight="500">0.5x</text>
                         
                         <!-- Right text labels -->
-                        <text x="915" y="77" fill="#ed1c24" font-family="var(--font-en)" font-size="12.5px" font-weight="500" letter-spacing="0.5px">FUTURA PT Medium</text>
-                        <text x="915" y="143" fill="#ed1c24" font-family="var(--font-en)" font-size="12.5px" font-weight="500" letter-spacing="0.5px">FUTURA PT Book</text>
-                        <text x="520" y="232" fill="#ed1c24" font-family="var(--font-en)" font-size="13px" font-weight="500" text-anchor="middle" letter-spacing="0.5px">Tracking: -10</text>
+                        <text x="854.5" y="77" fill="#ed1c24" font-family="var(--font-en)" font-size="12.5px" font-weight="500" letter-spacing="0.5px">FUTURA PT Medium</text>
+                        <text x="854.5" y="143" fill="#ed1c24" font-family="var(--font-en)" font-size="12.5px" font-weight="500" letter-spacing="0.5px">FUTURA PT Book</text>
+                        <text x="491.75" y="232" fill="#ed1c24" font-family="var(--font-en)" font-size="13px" font-weight="500" text-anchor="middle" letter-spacing="0.5px">Tracking: -10</text>
                         
                         <!-- Slogan lettering -->
-                        <use href="#slogan-master-paths" x="195.44" y="43.85" />
+                        <use href="#slogan-master-paths" x="165.19" y="43.85" />
                     </svg>
                 </div>
             `;
@@ -2164,7 +2164,7 @@ function renderBlockHTML(block, sectionId, index, totalBlocks) {
         } else {
             visualContent = `
                 <div class="visual-image-frame visual-image-svg-box" style="padding: 24px; background-color: #ffffff;">
-                    <svg viewBox="0 0 1069.88 426.15" style="width: 100%; height: auto; display: block; max-width: 810px; margin: 0 auto;">
+                    <svg viewBox="0 0 1009.57 426.15" style="width: 100%; height: auto; display: block; max-width: 810px; margin: 0 auto;">
                         <defs>
                             ${sloganMasterDefs}
                             <g id="monogram-master-path">
@@ -2172,15 +2172,15 @@ function renderBlockHTML(block, sectionId, index, totalBlocks) {
                             </g>
                         </defs>
                         <!-- Center vertical line -->
-                        <line x1="522.18" y1="0" x2="522.18" y2="390.52" stroke="#000000" stroke-dasharray="6 6" stroke-width="0.5px" fill="none" opacity="0.3" />
+                        <line x1="492.03" y1="0" x2="492.03" y2="390.52" stroke="#000000" stroke-dasharray="6 6" stroke-width="0.5px" fill="none" opacity="0.3" />
                         
                         <!-- Horizontal guidelines -->
-                        <line x1="136.87" y1="235.59" x2="903.52" y2="235.59" stroke="#02060f" stroke-width="0.5px" fill="none" opacity="0.3" />
-                        <line x1="136.87" y1="174.63" x2="903.52" y2="174.63" stroke="#02060f" stroke-width="0.5px" fill="none" opacity="0.3" />
-                        <line x1="136.87" y1="60.71" x2="903.52" y2="60.71" stroke="#02060f" stroke-width="0.5px" fill="none" opacity="0.3" />
-                        <line x1="136.87" y1="288.55" x2="903.52" y2="288.55" stroke="#02060f" stroke-width="0.5px" fill="none" opacity="0.3" />
-                        <line x1="136.87" y1="315.59" x2="903.52" y2="315.59" stroke="#02060f" stroke-width="0.5px" fill="none" opacity="0.3" />
-                        <line x1="136.87" y1="342.63" x2="903.52" y2="342.63" stroke="#02060f" stroke-width="0.5px" fill="none" opacity="0.3" />
+                        <line x1="136.87" y1="235.59" x2="843.21" y2="235.59" stroke="#02060f" stroke-width="0.5px" fill="none" opacity="0.3" />
+                        <line x1="136.87" y1="174.63" x2="843.21" y2="174.63" stroke="#02060f" stroke-width="0.5px" fill="none" opacity="0.3" />
+                        <line x1="136.87" y1="60.71" x2="843.21" y2="60.71" stroke="#02060f" stroke-width="0.5px" fill="none" opacity="0.3" />
+                        <line x1="136.87" y1="288.55" x2="843.21" y2="288.55" stroke="#02060f" stroke-width="0.5px" fill="none" opacity="0.3" />
+                        <line x1="136.87" y1="315.59" x2="843.21" y2="315.59" stroke="#02060f" stroke-width="0.5px" fill="none" opacity="0.3" />
+                        <line x1="136.87" y1="342.63" x2="843.21" y2="342.63" stroke="#02060f" stroke-width="0.5px" fill="none" opacity="0.3" />
                         
                         <!-- Left brackets -->
                         <polyline points="98.35 60.71 62.98 60.71 62.98 174.63 98.35 174.63" stroke="#ed1c24" stroke-width="0.8px" fill="none" />
@@ -2197,17 +2197,17 @@ function renderBlockHTML(block, sectionId, index, totalBlocks) {
                         <text x="32" y="334" fill="#ed1c24" font-family="var(--font-en)" font-size="14px" font-weight="500">0.5x</text>
                         
                         <!-- Right text labels -->
-                        <text x="915" y="268" fill="#ed1c24" font-family="var(--font-en)" font-size="12.5px" font-weight="500" letter-spacing="0.5px">FUTURA PT Medium</text>
-                        <text x="915" y="334" fill="#ed1c24" font-family="var(--font-en)" font-size="12.5px" font-weight="500" letter-spacing="0.5px">FUTURA PT Book</text>
+                        <text x="854.69" y="268" fill="#ed1c24" font-family="var(--font-en)" font-size="12.5px" font-weight="500" letter-spacing="0.5px">FUTURA PT Medium</text>
+                        <text x="854.69" y="334" fill="#ed1c24" font-family="var(--font-en)" font-size="12.5px" font-weight="500" letter-spacing="0.5px">FUTURA PT Book</text>
                         
                         <!-- Bottom label -->
-                        <text x="522" y="420" fill="#ed1c24" font-family="var(--font-en)" font-size="13px" font-weight="500" text-anchor="middle" letter-spacing="0.5px">Tracking: -10</text>
+                        <text x="492" y="420" fill="#ed1c24" font-family="var(--font-en)" font-size="13px" font-weight="500" text-anchor="middle" letter-spacing="0.5px">Tracking: -10</text>
                         
                         <!-- Monogram -->
-                        <use href="#monogram-master-path" transform="translate(479.12, 60.71) scale(0.2928)" fill="#231f20" />
+                        <use href="#monogram-master-path" transform="translate(448.97, 60.71) scale(0.2928)" fill="#231f20" />
                         
                         <!-- Slogan -->
-                        <use href="#slogan-master-paths" x="197.25" y="231.59" />
+                        <use href="#slogan-master-paths" x="167.1" y="231.59" />
                     </svg>
                 </div>
             `;
