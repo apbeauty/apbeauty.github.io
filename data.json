@@ -1,0 +1,258 @@
+{
+  "sections": [
+    {
+      "id": "wordmark",
+      "title": "AP WORDMARK",
+      "description": "",
+      "blocks": [
+        {
+          "id": "block_wm_1",
+          "type": "text",
+          "title": "CORE WORDMARK",
+          "content": "AP WORDMARK는 브랜드 이미지를 통합하는 대표적인 상징 요소이자, 브랜드의 가치를 함축적으로 담고 있는 중요한 시각적·법률적 자산입니다. 따라서 사용 시 오용 및 남용으로 인해 브랜드 가치가 훼손되거나 브랜드 이미지를 저해하는 방식은 지양해야 합니다.\n또한 AP WORDMARK는 반드시 원본 데이터를 기준으로 정비례 확대·축소하여 사용해야 하며, 임의의 변형이나 왜곡은 허용되지 않습니다.",
+          "image": "assets/core_wordmark_b.svg",
+          "download_file": "assets/AP BEAUTY WORDMARK.zip"
+        },
+        {
+          "id": "block_wm_2",
+          "type": "text",
+          "title": "Exclusion Zone",
+          "content": "AP WORDMARK은 사용 시 명확한 가독성과 시인성을 유지하기 위해 주변 요소로부터 시각적 독립성을 확보해야 합니다. \n이를 위해 워드마크 주변에는 규정된 최소 여백을 반드시 확보해야 하며, 어떠한 그래픽 요소도 해당 영역을 침범하지 않도록 합니다.",
+          "image": ""
+        },
+        {
+          "id": "block_wm_2_2",
+          "type": "text",
+          "title": "Minimum Size",
+          "content": "AP WORDMARK의 가독성과 재현성을 고려하여 규정한 것으로, 최소 사이즈 이하로 활용하지 않도록 합니다.\n인쇄물 기준 8mm, 디지털 환경 기준 23px 이상으로 사용해야 합니다.",
+          "image": ""
+        },
+        {
+          "id": "block_wm_4",
+          "type": "text",
+          "title": "BACKGROUND USAGE",
+          "content": "AP WORDMARK은 사용 시 명확한 가독성과 시인성을 배경 명도에 따른 워드마크 사용에 대한 규정입니다. \n본 항에 제시된 내용을 참고하여 워드마크의 명시성을 해치지 않도록 유의해야 합니다.",
+          "image": ""
+        },
+        {
+          "id": "block_wm_5",
+          "type": "text",
+          "title": "PRIMARY PLACEMENT",
+          "content": "AP WORDMARK가 단독으로 사용되는 경우에는 브랜드의 상징성이 명확하게 드러날 수 있도록 영역의 정중앙에 배치하는 것을 기본으로 합니다. \n별도의 텍스트, 타이틀, 그래픽 요소 없이 단독으로 적용될 경우, 안정적인 시각적 밸런스와 존재감을 위해 중앙 정렬 기준을 유지해야 합니다.",
+          "image": ""
+        },
+        {
+          "id": "block_wm_6",
+          "type": "text",
+          "title": "SECONDARY PLACEMENT",
+          "content": "AP WORDMARK가 텍스트, 타이틀, 그래픽 요소 등과 함께 사용되는 경우에는 전체 구성의 균형과 시인성을 고려하여 상단 배치를 기본으로 합니다. 좌우 기준의 중앙은 유지한 상태에서 상측에 배치하도록 합니다.",
+          "image": ""
+        },
+        {
+          "id": "block_wm_7",
+          "type": "text",
+          "title": "INCORRECT USAGE",
+          "content": "AP WORDMARK는 브랜드 이미지 발신의 주요 요소이자 브랜드 일관성을 유지하는 핵심 자산입니다.\n따라서 형태를 임의로 변경하거나 변형하여 고유의 이미지가 훼손되지 않도록 반드시 규정된 색상과 형태를 준수해야 합니다. 또한 원본 데이터를 기준으로 정비례 확대·축소하여 사용하는 것을 원칙으로 하며, 비율을 임의로 변형하여 사용할 수 없습니다.\n다음의 예시는 AP WORDMARK의 잘못된 활용 사례로, 규정 외의 부적절한 형태 및 조합 사용을 방지하기 위한 기준입니다. 활용 시 해당 예시와 같은 방식의 사용은 지양하도록 합니다.",
+          "image": ""
+        }
+      ]
+    },
+    {
+      "id": "monogram",
+      "title": "AP MONOGRAM",
+      "description": "스킨케어의 정점을 뜻하는 'APEX OF SKINCARE'의 이니셜 A와 P를 융합한 핵심 심볼입니다. 과감한 유기적 라인으로 무한한 혁신과 도전을 상징합니다.",
+      "blocks": [
+        {
+          "id": "block_mono_1",
+          "type": "text",
+          "title": "CORE MONOGRAM",
+          "content": "AP MONOGRAM은 브랜드 이미지를 통합하는 대표적인 상징 요소이자, 브랜드의 가치를 함축적으로 담고 있는 중요한 시각적·법률적 자산입니다. \n따라서 사용 시 오용 및 남용으로 인해 브랜드 가치가 훼손되거나 브랜드 이미지를 저해하는 방식은 지양해야 합니다. \n또한 AP MONOGRAM은 반드시 원본 데이터를 기준으로 정비례 확대·축소하여 사용해야 하며, 임의의 변형이나 왜곡은 허용되지 않습니다.",
+          "image": "assets/core_monogram_b.svg",
+          "download_file": "assets/AP BEAUTY MONOGRAM.zip"
+        },
+        {
+          "id": "block_mono_2",
+          "type": "text",
+          "title": "SYSTEM",
+          "content": "AP MONOGRAM은 APEX OF SKINCARE의 이니셜인 A와 P를 기반으로, 각 알파벳이 최적의 균형과 조화를 이루도록 설계된 브랜드의 핵심 상징 요소입니다. \n서로의 경계를 넘어 뻗어 나가는 과감한 형태는 한계 없는 혁신과 도전 정신을 향한 AP만의 철학과 비전을 상징합니다.",
+          "image": ""
+        },
+        {
+          "id": "block_mono_3",
+          "type": "text",
+          "title": "EXCLUSION ZONE",
+          "content": "AP MONOGRAM은 사용 시 명확한 가독성과 시인성을 유지하기 위해 주변 요소로부터 시각적 독립성을 확보해야 합니다. \n이를 위해 모노그램 주변에는 규정된 최소 여백을 반드시 확보해야 하며, 어떠한 그래픽 요소도 해당 영역을 침범하지 않도록 합니다.",
+          "image": "assets/monogram_exculusion zone.svg"
+        },
+        {
+          "id": "block_mono_3_2",
+          "type": "text",
+          "title": "MINIMUM SIZE",
+          "content": "AP MONOGRAM 형태의 재현성을 고려하여 규정한 것으로 최소 사이즈 이하로 활용하지 않도록 합니다.",
+          "image": ""
+        },
+        {
+          "id": "block_mono_5",
+          "type": "text",
+          "title": "BACKGROUND USAGE",
+          "content": "AP MONOGRAM은 사용 시 명확한 가독성과 시인성을 배경 명도에 따른 모노그램 사용에 대한 규정입니다. \n본 항에 제시된 내용을 참고하여 모노그램의 명시성을 해치지 않도록 유의해야 합니다.",
+          "image": ""
+        },
+        {
+          "id": "block_mono_6",
+          "type": "text",
+          "title": "PLACEMENT GUIDE",
+          "content": "AP MONOGRAM은 적용 매체의 특성과 시각적 밸런스를 고려하여 기준 축에 따라 배치해야 합니다. 각 환경에 맞는 중앙 기준을 적용하여 일관된 브랜드 경험과 안정적인 시인성을 유지하도록 합니다.\n제품, VMD, 온라인 콘텐츠 적용 시에는 P의 좌측 세로획 중심을 기준으로 로고의 중심축을 설정합니다. 표시된 빨간선은 중앙 가이드입니다.\n인테리어 집기, 캐노피, 파사드 적용 시에는 P의 좌측 세로획 우측변을 기준으로 로고의 중심축을 설정합니다. 표시된 빨간선은 중앙 가이드입니다.",
+          "image": ""
+        },
+        {
+          "id": "block_mono_7",
+          "type": "text",
+          "title": "PRIMARY PLACEMENT",
+          "content": "AP MONOGRAM이 단독으로 사용되는 경우에는 브랜드의 상징성이 명확하게 드러날 수 있도록 영역의 정중앙에 배치하는 것을 기본으로 합니다. \n별도의 텍스트, 타이틀, 그래픽 요소 없이 단독으로 적용될 경우, 안정적인 시각적 밸런스와 존재감을 위해 중앙 정렬 기준을 유지해야 합니다.",
+          "image": ""
+        },
+        {
+          "id": "block_mono_8",
+          "type": "text",
+          "title": "SECONDARY PLACEMENT",
+          "content": "AP MONOGRAM이 텍스트, 타이틀, 그래픽 요소 등과 함께 사용되는 경우에는 전체 구성의 균형과 시인성을 고려하여 상단 배치를 기본으로 합니다. 좌우 기준의 중앙은 유지한 상태에서 상측에 배치하도록 합니다.",
+          "image": ""
+        },
+        {
+          "id": "block_mono_9",
+          "type": "text",
+          "title": "INCORRECT USAGE",
+          "content": "AP MONOGRAM은 브랜드 이미지 발신의 주요 요소이자 브랜드 일관성을 유지하는 핵심 자산입니다.\n따라서 형태를 임의로 변경하거나 변형하여 고유의 이미지가 훼손되지 않도록 반드시 규정된 색상과 형태를 준수해야 합니다. 또한 원본 데이터를 기준으로 정비례 확대·축소하여 사용하는 것을 원칙으로 하며, 비율을 임의로 변형하여 사용할 수 없습니다.\n다음의 예시는 AP MONOGRAM의 잘못된 활용 사례로, 규정 외의 부적절한 형태 및 조합 사용을 방지하기 위한 기준입니다. 활용 시 해당 예시와 같은 방식의 사용은 지양하도록 합니다.",
+          "image": ""
+        }
+      ]
+    },
+    {
+      "id": "lockup",
+      "title": "AP LOCK-UP",
+      "description": "모노그램과 워드마크를 결합하여 사용하는 공인 조합 규정입니다. 브랜드의 인지도를 확보하고 명확성을 주기 위해 정해진 비율 규격을 반드시 준수합니다.",
+      "blocks": [
+        {
+          "id": "block_lock_1",
+          "type": "text",
+          "title": "AP LOCK-UP",
+          "content": "AP Lock-up은 AP Monogram과 AP Wordmark를 결합한 공식 브랜드 시그니처입니다. 심볼과 워드마크 간의 간격 및 상대적 비율은 브랜드 기준에 따라 설계되었으며, 각 요소를 분리하거나 크기 및 간격을 임의로 변경할 수 없습니다. AP Lock-up은 원본 데이터를 기준으로 정비례 확대·축소하여 사용해야 합니다.",
+          "image": "assets/pages/page_23.png"
+        }
+      ]
+    },
+    {
+      "id": "slogan",
+      "title": "AP SLOGAN",
+      "description": "AP BEAUTY의 가치관과 비전을 드러내는 슬로건 규정입니다. 지정된 폰트 패밀리와 스타일 및 간격 규정을 사용해야 합니다.",
+      "blocks": [
+        {
+          "id": "block_slog_1",
+          "type": "text",
+          "title": "AP SLOGAN",
+          "content": "AP SLOGAN은 브랜드 철학과 비전을 함축적으로 전달하는 핵심 커뮤니케이션 요소입니다. 브랜드의 일관된 이미지를 유지하기 위해 규정된 형태와 기준에 따라 사용해야 하며, 임의의 수정이나 변형은 허용되지 않습니다.",
+          "image": ""
+        },
+        {
+          "id": "block_slog_2",
+          "type": "text",
+          "title": "Structure",
+          "content": "AP SLOGAN은 브랜드 메시지의 일관성과 가독성을 유지하기 위해 지정된 서체, 자간 및 비례 규정을 준수하여 사용합니다. 슬로건의 구성 요소 간 관계는 변경할 수 없으며, 원본 데이터를 기준으로 정비례 확대·축소하여 사용합니다.",
+          "image": ""
+        },
+        {
+          "id": "block_slog_3",
+          "type": "text",
+          "title": "Exclusion Zone",
+          "content": "AP SLOGAN은 명확한 가독성과 시인성을 확보하기 위해 주변 요소로부터 충분한 독립 공간을 유지해야 합니다. 규정된 최소 여백 내에는 어떠한 텍스트나 그래픽 요소도 침범할 수 없습니다.",
+          "image": ""
+        },
+        {
+          "id": "block_slog_4",
+          "type": "text",
+          "title": "Lock-up with Monogram",
+          "content": "AP SLOGAN과 AP Monogram을 함께 사용할 경우에는 규정된 비율과 간격을 유지해야 합니다. 각 요소의 크기, 위치 및 관계를 임의로 변경하지 않으며, 브랜드의 일관된 시각 체계를 유지하도록 사용합니다.",
+          "image": ""
+        }
+      ]
+    },
+    {
+      "id": "colors",
+      "title": "BRAND COLOR",
+      "description": "지정된 브랜드 컬러는 아이덴티티 형성에 중요한 역할을 합니다. 특히 메인 라인별 팔레트를 혼용하지 않고 매뉴얼대로 출력하는 것이 매우 중요합니다.",
+      "blocks": [
+        {
+          "id": "block_col_1",
+          "type": "text",
+          "title": "MAIN COLORS",
+          "content": "색상은 브랜드 이미지 형성의 중요한 요소입니다. 규정 외의 색상 사용은 브랜드 이미지를 왜곡시키거나 커뮤니케이션 효과를 악화시킬 수 있으므로 사용 시 세심한 주의가 필요합니다. 지정 색상은 브랜드를 상징하는 대표 색상으로서 본 항에 제시된 색상값을 활용하여 모든 매체에서 정확하게 활용해야 합니다.",
+          "image": "assets/pages/page_35.png"
+        }
+      ]
+    },
+    {
+      "id": "typeface",
+      "title": "TYPEFACE",
+      "description": "AP BEAUTY에 적용하는 전용 서체 가이드라인입니다. 영문 헤드라인은 Futura PT를 기본으로 하며 국문은 Noto Sans KR을 표준으로 삼아 가독성을 최우선으로 고려합니다.",
+      "blocks": [
+        {
+          "id": "block_tf_1",
+          "type": "text",
+          "title": "ENGLISH TYPEFACE | Futura PT",
+          "content": "지정 서체는 브랜드 이미지를 일관되게 유지하고 다른 브랜드 요소와 조화롭게 구성하기 위해 선정된 서체입니다. 브랜드 이미지를 전달하는 헤드라인, 타이틀, 핵심 문구 등 주요 텍스트에 사용하며, 적용 항목의 성격에 따라 적절한 두께를 선택하여 사용할 수 있습니다.",
+          "image": ""
+        },
+        {
+          "id": "block_tf_2",
+          "type": "text",
+          "title": "KOREAN TYPEFACE | Noto Sans KR",
+          "content": "지정 서체는 브랜드 이미지를 일관되게 유지하고 다른 브랜드 요소와 조화롭게 구성하기 위해 선정된 서체입니다. 가독성이 요구되는 각종 시각 전달 매체의 본문 및 문안에 사용하며, 적용 항목의 성격에 따라 적절한 두께를 선택하여 사용할 수 있습니다.",
+          "image": ""
+        },
+        {
+          "id": "block_tf_3",
+          "type": "text",
+          "title": "CHINESE TYPEFACE | Noto Sans SC",
+          "content": "지정 서체는 브랜드 이미지를 일관되게 유지하고 다른 브랜드 요소와 조화롭게 구성하기 위해 선정된 서체입니다. 가독성이 요구되는 각종 시각 전달 매체의 본문 및 문안에 사용하며, 적용 항목의 성격에 따라 적절한 두께를 선택하여 사용할 수 있습니다.",
+          "image": ""
+        }
+      ]
+    },
+    {
+      "id": "applications",
+      "title": "APPLICATIONS",
+      "description": "AP BEAUTY 브랜드 디자인이 적용된 다양한 어플리케이션 예시입니다.",
+      "blocks": [
+        {
+          "id": "block_app_1",
+          "type": "text",
+          "title": "PACKAGING",
+          "content": "",
+          "image": "assets/applications/packaging_1.png, assets/applications/packaging_2.png"
+        },
+        {
+          "id": "block_app_2",
+          "type": "text",
+          "title": "RETAIL",
+          "content": "",
+          "image": "assets/applications/retail_1.png, assets/applications/retail_2.png"
+        },
+        {
+          "id": "block_app_3",
+          "type": "text",
+          "title": "VISUAL",
+          "content": "",
+          "image": "assets/applications/visual_6.png"
+        },
+        {
+          "id": "block_app_4",
+          "type": "text",
+          "title": "DIGITAL",
+          "content": "",
+          "image": "assets/applications/digital_1.png"
+        }
+      ]
+    }
+  ]
+}
