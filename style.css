@@ -941,17 +941,32 @@ body.edit-mode .add-block-placeholder {
         padding: 12px 0 !important; /* Align to the left on mobile by removing padding */
     }
 
-    /* Interactive controls responsive layout on mobile */
+    /* Interactive controls responsive layout on mobile (kept in single row, with larger click target) */
     .interactive-controls {
-        flex-direction: column !important;
-        align-items: stretch !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        justify-content: space-between !important;
         gap: 12px !important;
-    }
-    .interactive-controls .slider-control-container {
         width: 100% !important;
     }
+    .interactive-controls .slider-control-container {
+        flex: 1 !important;
+        width: auto !important;
+    }
     .interactive-controls .action-buttons-container {
-        justify-content: flex-end !important;
+        flex-shrink: 0 !important;
+        display: flex !important;
+        gap: 8px !important;
+    }
+
+    /* Monogram Exclusion Zone SVG size 130% larger on mobile */
+    #block-block_mono_3 .visual-image-svg-box {
+        aspect-ratio: 1.557 !important; /* Made 1.3x taller to render SVG 130% larger */
+    }
+
+    /* Prevent iOS auto-zoom on input elements by forcing at least 16px font size */
+    input, select, textarea, .header-search-input, .search-bar-input {
+        font-size: 16px !important;
     }
 }
 
@@ -1306,7 +1321,7 @@ body.edit-mode .add-block-placeholder {
         min-height: 140px;
     }
     .typeface-showcase-box {
-        padding: 24px !important;
+        padding: 0 !important;
     }
     .typeface-grid {
         grid-template-columns: repeat(2, 1fr);

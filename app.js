@@ -1220,7 +1220,7 @@ function renderBlockHTML(block, sectionId, index, totalBlocks) {
             <div class="slider-control-container" style="display: flex; align-items: center; justify-content: flex-start; flex: 1; pointer-events: auto;">
                 <div class="slider-control-inner" style="display: flex; align-items: center; gap: 12px; width: 100%;">
                     <span style="font-size: 10px; font-family: var(--font-en); font-weight: 400; letter-spacing: 1px; color: var(--control-text-color, var(--ap-gray)); user-select: none;">SIZE</span>
-                    <div style="position: relative; flex: 1; height: 14px;">
+                    <div style="position: relative; flex: 1; height: 38px; display: flex; align-items: center;">
                         <div id="slider-track-line${suffix}" style="position: absolute; top: 50%; left: 0; right: 0; height: 2px; background: rgba(0, 0, 0, 0.12); background: var(--slider-track-color, rgba(0, 0, 0, 0.12)); transform: translateY(-50%); pointer-events: none; z-index: 0;"></div>
                         <div id="slider-visual-thumb${suffix}" style="position: absolute; top: 50%; width: 10px; height: 10px; border-radius: 50% !important; background: #555555; background: var(--slider-thumb-color, #555555); transform: translate(-50%, -50%); pointer-events: none; z-index: 1; left: 100%; transition: left 0.05s ease; box-sizing: border-box;"></div>
                         <input type="range" id="wordmark-size-slider${suffix}" min="0.1" max="0.90" step="0.01" value="0.90" style="-webkit-appearance: none; appearance: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; margin: 0; padding: 0; opacity: 0; cursor: pointer; z-index: 2; background: transparent; border: none; outline: none;">
