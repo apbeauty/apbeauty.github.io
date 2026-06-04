@@ -1039,10 +1039,10 @@ body.edit-mode .add-block-placeholder {
         margin: 0 -12.5% !important;
     }
     #block-block_mono_1 .visual-image-frame img {
-        width: 240% !important;
-        max-width: 240% !important;
+        width: 168% !important;
+        max-width: 168% !important;
         display: block !important;
-        margin: 0 -70% !important;
+        margin: 0 -34% !important;
     }
 
     /* Monogram System vertical margin and padding adjustments on mobile */
@@ -2406,6 +2406,10 @@ body.edit-mode .add-block-placeholder {
     color: #111111;
     line-height: 18px;
     z-index: 10;
+}
+
+.incorrect-item:last-child .incorrect-label {
+    color: #ffffff !important;
 }
 
 @media (max-width: 768px) {
