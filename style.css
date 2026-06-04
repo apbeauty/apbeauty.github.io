@@ -1031,18 +1031,18 @@ body.edit-mode .add-block-placeholder {
         padding: 0 !important;
     }
 
-    /* CORE WORDMARK and CORE MONOGRAM occupies 104% width on mobile with centering */
+    /* CORE WORDMARK and CORE MONOGRAM occupies larger width on mobile with centering */
     #block-block_wm_1 .visual-image-frame img {
-        width: 104% !important;
-        max-width: 104% !important;
+        width: 125% !important;
+        max-width: 125% !important;
         display: block !important;
-        margin: 0 -2% !important;
+        margin: 0 -12.5% !important;
     }
     #block-block_mono_1 .visual-image-frame img {
-        width: 104% !important;
-        max-width: 104% !important;
+        width: 156% !important;
+        max-width: 156% !important;
         display: block !important;
-        margin: 0 -2% !important;
+        margin: 0 -28% !important;
     }
 
     /* Monogram System vertical margin and padding adjustments on mobile */
