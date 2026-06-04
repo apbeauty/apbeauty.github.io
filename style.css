@@ -570,7 +570,7 @@ body.edit-mode .add-block-placeholder {
 
 @media (max-width: 900px) {
     .guide-block {
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(0, 1fr);
         gap: 36px;
         padding: 48px 0;
     }
@@ -609,10 +609,37 @@ body.edit-mode .add-block-placeholder {
         visibility: visible;
     }
     
+    .app-container {
+        flex-direction: column !important;
+    }
+
     .main-content {
         margin-left: 0;
-        padding: 24px;
+        padding: 24px !important;
         padding-top: calc(var(--header-height) + 19px) !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+        box-sizing: border-box !important;
+        overflow-x: hidden !important;
+    }
+
+    .sections-container,
+    .guide-section,
+    .guide-block,
+    .block-text-column,
+    .block-visual-column,
+    .interactive-wordmark-frame,
+    .wordmark-preview-area {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+        box-sizing: border-box !important;
+    }
+
+    .text-block-content,
+    .content-paragraph {
+        word-break: break-word !important;
     }
     
     .content-header {
