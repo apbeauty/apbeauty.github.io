@@ -1485,14 +1485,15 @@ body.edit-mode .add-block-placeholder {
 }
 
 #block-block_mono_3 .visual-image-svg-box {
-    aspect-ratio: 2.0245 !important; /* Adjusted aspect ratio to double the vertical padding */
+    aspect-ratio: 2.0245 !important;
 }
 
 #block-block_mono_3 .visual-image-svg-box img {
-    width: 38.3% !important; /* Scaled down by an additional 90% */
-    height: 81.8% !important; /* Adjusted relative to new container height to double margins */
-    top: 9.1% !important; /* Doubled margin: (100% - 81.8%) / 2 */
-    left: 28.9% !important; /* Shifted right by 3% (25.9% + 3% = 28.9%) */
+    width: auto !important;
+    height: 100% !important;
+    top: 0 !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
 }
 
 #block-block_mono_3_2 .visual-image-svg-box {
