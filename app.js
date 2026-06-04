@@ -2094,7 +2094,7 @@ function renderBlockHTML(block, sectionId, index, totalBlocks) {
         } else if (block.id === 'block_slog_2') {
             visualContent = `
                 <div class="visual-image-frame visual-image-svg-box" style="padding: 24px 0; background-color: #ffffff;">
-                    <svg viewBox="0 0 1007.63 240.36" style="width: 100%; height: auto; display: block; max-width: 810px; margin: 0 auto;">
+                    <svg viewBox="0 0 935 240.36" style="width: 100%; height: auto; display: block; max-width: 810px; margin: 0 auto;">
                         <defs>
                             ${sloganMasterDefs}
                         </defs>
@@ -2118,8 +2118,11 @@ function renderBlockHTML(block, sectionId, index, totalBlocks) {
                         <text x="26" y="145" fill="#ed1c24" font-family="var(--font-en)" font-size="16px" font-weight="500">0.5x</text>
                         
                         <!-- Right text labels -->
-                        <text x="854.5" y="77" fill="#ed1c24" font-family="var(--font-en)" font-size="12.5px" font-weight="500" letter-spacing="0.5px">FUTURA PT Medium</text>
-                        <text x="854.5" y="143" fill="#ed1c24" font-family="var(--font-en)" font-size="12.5px" font-weight="500" letter-spacing="0.5px">FUTURA PT Book</text>
+                        <text x="854.5" y="69" fill="#ed1c24" font-family="var(--font-en)" font-size="12.5px" font-weight="500" letter-spacing="0.5px">FUTURA PT</text>
+                        <text x="854.5" y="83" fill="#ed1c24" font-family="var(--font-en)" font-size="12.5px" font-weight="500" letter-spacing="0.5px">Medium</text>
+                        
+                        <text x="854.5" y="135" fill="#ed1c24" font-family="var(--font-en)" font-size="12.5px" font-weight="500" letter-spacing="0.5px">FUTURA PT</text>
+                        <text x="854.5" y="149" fill="#ed1c24" font-family="var(--font-en)" font-size="12.5px" font-weight="500" letter-spacing="0.5px">Book</text>
                         <text x="491.75" y="232" fill="#ed1c24" font-family="var(--font-en)" font-size="13px" font-weight="500" text-anchor="middle" letter-spacing="0.5px">Tracking: -10</text>
                         
                         <!-- Slogan lettering -->
@@ -2164,7 +2167,7 @@ function renderBlockHTML(block, sectionId, index, totalBlocks) {
         } else {
             visualContent = `
                 <div class="visual-image-frame visual-image-svg-box" style="padding: 24px 0; background-color: #ffffff;">
-                    <svg viewBox="0 0 1009.57 426.15" style="width: 100%; height: auto; display: block; max-width: 810px; margin: 0 auto;">
+                    <svg viewBox="0 0 935 426.15" style="width: 100%; height: auto; display: block; max-width: 810px; margin: 0 auto;">
                         <defs>
                             ${sloganMasterDefs}
                             <g id="monogram-master-path">
@@ -2197,8 +2200,11 @@ function renderBlockHTML(block, sectionId, index, totalBlocks) {
                         <text x="32" y="334" fill="#ed1c24" font-family="var(--font-en)" font-size="14px" font-weight="500">0.5x</text>
                         
                         <!-- Right text labels -->
-                        <text x="854.69" y="268" fill="#ed1c24" font-family="var(--font-en)" font-size="12.5px" font-weight="500" letter-spacing="0.5px">FUTURA PT Medium</text>
-                        <text x="854.69" y="334" fill="#ed1c24" font-family="var(--font-en)" font-size="12.5px" font-weight="500" letter-spacing="0.5px">FUTURA PT Book</text>
+                        <text x="854.69" y="260" fill="#ed1c24" font-family="var(--font-en)" font-size="12.5px" font-weight="500" letter-spacing="0.5px">FUTURA PT</text>
+                        <text x="854.69" y="274" fill="#ed1c24" font-family="var(--font-en)" font-size="12.5px" font-weight="500" letter-spacing="0.5px">Medium</text>
+                        
+                        <text x="854.69" y="326" fill="#ed1c24" font-family="var(--font-en)" font-size="12.5px" font-weight="500" letter-spacing="0.5px">FUTURA PT</text>
+                        <text x="854.69" y="340" fill="#ed1c24" font-family="var(--font-en)" font-size="12.5px" font-weight="500" letter-spacing="0.5px">Book</text>
                         
                         <!-- Bottom label -->
                         <text x="492" y="420" fill="#ed1c24" font-family="var(--font-en)" font-size="13px" font-weight="500" text-anchor="middle" letter-spacing="0.5px">Tracking: -10</text>
