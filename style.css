@@ -710,15 +710,15 @@ body.edit-mode .add-block-placeholder {
         cursor: pointer;
         display: flex;
         align-items: baseline;
-        gap: 10px;
+        gap: 8px; /* Reduced gap to 80% (from 10px) */
     }
     
     .mobile-header-subtitle {
         font-family: var(--font-en), sans-serif;
-        font-size: 15px; /* Restored to original size */
+        font-size: 15px;
         font-weight: 400;
         color: var(--ap-white);
-        letter-spacing: 2px;
+        letter-spacing: 1.7px; /* Reduced letter-spacing to 85% (from 2px) */
         line-height: 1;
         text-transform: uppercase;
         margin-bottom: 0;
@@ -730,17 +730,17 @@ body.edit-mode .add-block-placeholder {
     .mobile-actions {
         display: flex;
         align-items: center;
-        gap: 0px; /* Tightly pack action buttons */
+        gap: 2px; /* Adjusted gap between buttons to 2px */
     }
     
     .mobile-actions::before {
         content: "";
         display: block;
         width: 1px;
-        height: 18px; /* Taller vertical separator line */
-        background-color: rgba(0, 0, 0, 0.2); /* Slightly darker gray line */
-        margin-right: 4px; /* Placed very close to the EN button */
-        margin-left: 0px; /* Left aligned */
+        height: 22px; /* Increased vertical separator height to 22px */
+        background-color: rgba(0, 0, 0, 0.2);
+        margin-right: 4px;
+        margin-left: 0px;
     }
     
     .header-action-btn {
