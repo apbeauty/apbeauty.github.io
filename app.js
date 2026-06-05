@@ -234,6 +234,8 @@ function setupEventListeners() {
         // Close dropdown menu when pressing Enter key
         mobileDropdownSearch.addEventListener('keydown', (e) => {
             if (e.key === 'Enter') {
+                if (e.isComposing) return; // Prevent IME double commit duplication
+                
                 mobileDropdownSearch.blur(); // Hide virtual keyboard
                 
                 const mobileMenuDropdown = document.getElementById('mobile-menu-dropdown');
