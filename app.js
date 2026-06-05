@@ -2153,6 +2153,9 @@ function checkMatch(text, query) {
         ['typeface', '서체'],
         ['typeface', '폰트'],
         ['typeface', '글꼴'],
+        ['font', '서체'],
+        ['font', '폰트'],
+        ['font', '글꼴'],
         ['structure', '구조'],
         ['grid', '그리드']
     ];
