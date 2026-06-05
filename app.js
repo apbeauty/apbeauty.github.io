@@ -186,16 +186,20 @@ function setupEventListeners() {
 
     // Search Synchronizer & Initializer
     const sidebarSearch = document.getElementById('sidebar-search-input');
-    const headerSearch = document.getElementById('header-search-input');
-    const headerSearchToggle = document.getElementById('header-search-toggle');
-    const headerSearchBox = document.getElementById('header-search-box');
-    const headerSearchClose = document.getElementById('header-search-close');
+    const mobileDropdownSearch = document.getElementById('mobile-dropdown-search-input');
+    const mobileDropdownSearchClear = document.getElementById('mobile-dropdown-search-clear');
     const searchClearBtn = document.getElementById('search-clear-btn');
 
     function syncSearch(query) {
         const normalized = query.toLowerCase().trim();
         if (sidebarSearch) sidebarSearch.value = query;
-        if (headerSearch) headerSearch.value = query;
+        if (mobileDropdownSearch) mobileDropdownSearch.value = query;
+        
+        // Show/hide clear button in mobile search
+        if (mobileDropdownSearchClear) {
+            mobileDropdownSearchClear.style.display = query ? 'flex' : 'none';
+        }
+        
         handleSearch(normalized);
     }
 
@@ -209,13 +213,18 @@ function setupEventListeners() {
         });
     }
 
-    if (headerSearch) {
+    if (mobileDropdownSearch) {
         let debounceTimer;
-        headerSearch.addEventListener('input', (e) => {
+        mobileDropdownSearch.addEventListener('input', (e) => {
             clearTimeout(debounceTimer);
             debounceTimer = setTimeout(() => {
                 syncSearch(e.target.value);
             }, 150);
+        });
+        
+        // Prevent closing dropdown when clicking input
+        mobileDropdownSearch.addEventListener('click', (e) => {
+            e.stopPropagation();
         });
     }
 
@@ -226,21 +235,11 @@ function setupEventListeners() {
         });
     }
 
-    if (headerSearchToggle && headerSearchBox) {
-        headerSearchToggle.addEventListener('click', (e) => {
+    if (mobileDropdownSearchClear) {
+        mobileDropdownSearchClear.addEventListener('click', (e) => {
             e.stopPropagation();
-            headerSearchBox.classList.add('active');
-            if (headerSearch) {
-                headerSearch.focus();
-            }
-        });
-    }
-
-    if (headerSearchClose && headerSearchBox) {
-        headerSearchClose.addEventListener('click', (e) => {
-            e.stopPropagation();
-            headerSearchBox.classList.remove('active');
             syncSearch('');
+            if (mobileDropdownSearch) mobileDropdownSearch.focus();
         });
     }
 
@@ -268,9 +267,13 @@ function setupEventListeners() {
         if (searchClearBtn) {
             searchClearBtn.setAttribute('title', isEn ? 'Clear search' : '검색 지우기');
         }
-        const headerSearchToggle = document.getElementById('header-search-toggle');
-        if (headerSearchToggle) {
-            headerSearchToggle.setAttribute('title', isEn ? 'Search' : '검색');
+        const mobileDropdownSearch = document.getElementById('mobile-dropdown-search-input');
+        if (mobileDropdownSearch) {
+            mobileDropdownSearch.placeholder = isEn ? 'SEARCH' : '검색';
+        }
+        const mobileDropdownClear = document.getElementById('mobile-dropdown-search-clear');
+        if (mobileDropdownClear) {
+            mobileDropdownClear.setAttribute('title', isEn ? 'Clear search' : '검색 지우기');
         }
         const mToggleBtn = document.getElementById('menu-toggle-btn');
         if (mToggleBtn) {
@@ -2152,6 +2155,12 @@ function handleSearch(query) {
         activeSectionId = '';
         updateActiveNavLink('', '');
         
+        // Reset mobile menu links
+        const mobileMenuLinks = document.querySelectorAll('.mobile-menu-link');
+        mobileMenuLinks.forEach(link => {
+            link.style.display = 'block';
+        });
+        
         // Remove empty message if any
         const emptyMsg = document.getElementById('search-empty-message');
         if (emptyMsg) emptyMsg.remove();
@@ -2253,6 +2262,15 @@ function handleSearch(query) {
                 submenu.classList.remove('expanded');
             }
         }
+    });
+    
+    // Filter Mobile Menu Links
+    const mobileMenuLinks = document.querySelectorAll('.mobile-menu-link');
+    mobileMenuLinks.forEach(link => {
+        const targetId = link.getAttribute('href').replace('#', '');
+        const sectionEl = document.getElementById(`section-${targetId}`);
+        const isSectionVisible = sectionEl && sectionEl.style.display !== 'none';
+        link.style.display = isSectionVisible ? 'block' : 'none';
     });
     
     // Handle empty state

@@ -63,22 +63,9 @@
                         <span class="mobile-header-subtitle">BRAND GUIDELINE</span>
                     </div>
                     
-                    <!-- Right: Search toggle, Language toggle & Hamburger menu -->
+                    <!-- Right: Language toggle & Hamburger menu -->
                     <div class="mobile-actions">
-                        <!-- Header Search Box (hidden by default) -->
-                        <div class="header-search-container" id="header-search-box">
-                            <input type="text" id="header-search-input" class="header-search-input" placeholder="SEARCH">
-                            <button id="header-search-close" class="header-search-close-btn">✕</button>
-                        </div>
-                        
                         <button id="header-lang-toggle-btn" class="header-action-btn btn-lang-square" title="Language">EN</button>
-                        
-                        <button id="header-search-toggle" class="header-action-btn" title="검색">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                                <circle cx="10.5" cy="10.5" r="6.5"></circle>
-                                <line x1="21" y1="21" x2="15.1" y2="15.1"></line>
-                            </svg>
-                        </button>
                         
                         <button id="menu-toggle-btn" class="header-action-btn hamburger-btn" title="메뉴">
                             <span></span>
@@ -91,6 +78,15 @@
 
             <!-- Mobile Slide-Down Dropdown Menu -->
             <div class="mobile-menu-dropdown" id="mobile-menu-dropdown">
+                <!-- Mobile Dropdown Search Box -->
+                <div class="mobile-dropdown-search-container">
+                    <svg class="mobile-dropdown-search-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                    <input type="text" id="mobile-dropdown-search-input" class="mobile-dropdown-search-input" placeholder="SEARCH">
+                    <button id="mobile-dropdown-search-clear" class="mobile-dropdown-search-clear-btn" title="Clear Search">✕</button>
+                </div>
                 <nav class="mobile-menu-nav" id="mobile-menu-nav">
                     <!-- Dynamic links will be populated here -->
                 </nav>

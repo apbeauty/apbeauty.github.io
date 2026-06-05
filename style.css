@@ -836,15 +836,70 @@ body.edit-mode .add-block-placeholder {
     }
     
     .mobile-menu-dropdown.active {
-        max-height: 380px;
+        max-height: 460px; /* Increased from 380px to accommodate search bar */
         opacity: 1;
         visibility: visible;
+    }
+    
+    .mobile-dropdown-search-container {
+        display: flex;
+        align-items: center;
+        background-color: #fafafa;
+        border: 1px solid var(--ap-border);
+        border-radius: 4px;
+        margin: 20px 24px 8px 24px;
+        padding: 8px 12px;
+        gap: 8px;
+        transition: border-color 0.2s ease, background-color 0.2s ease;
+    }
+    
+    .mobile-dropdown-search-container:focus-within {
+        border-color: rgba(0, 0, 0, 0.3);
+        background-color: #ffffff;
+    }
+    
+    .mobile-dropdown-search-icon {
+        color: var(--ap-silver);
+        flex-shrink: 0;
+    }
+    
+    .mobile-dropdown-search-input {
+        border: none;
+        background: transparent;
+        font-family: var(--font-en);
+        font-size: 0.95rem;
+        letter-spacing: 0.5px;
+        width: 100%;
+        color: var(--ap-white);
+        outline: none;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+    .mobile-dropdown-search-input::placeholder {
+        color: var(--ap-silver);
+    }
+    
+    .mobile-dropdown-search-clear-btn {
+        background: none;
+        border: none;
+        cursor: pointer;
+        color: var(--ap-silver);
+        font-size: 1.05rem;
+        padding: 0;
+        display: none; /* Controlled by JS */
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .mobile-dropdown-search-clear-btn:hover {
+        color: #000000;
     }
     
     .mobile-menu-nav {
         display: flex;
         flex-direction: column;
-        padding: 20px 24px;
+        padding: 10px 24px 20px 24px; /* Reduced top padding slightly for balance with search */
         gap: 12px;
     }
     
@@ -867,58 +922,6 @@ body.edit-mode .add-block-placeholder {
     .mobile-menu-link.active {
         color: #000000 !important;
         transform: scale(1.03);
-    }
-    
-    .header-search-container {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-color: #ffffff;
-        display: flex;
-        align-items: center;
-        padding: 0 20px;
-        z-index: 1010;
-        opacity: 0;
-        visibility: hidden;
-        transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.25s;
-    }
-    
-    .header-search-container.active {
-        opacity: 1;
-        visibility: visible;
-    }
-    
-    .header-search-input {
-        flex: 1;
-        height: 100%;
-        border: none;
-        outline: none;
-        font-family: var(--font-en);
-        font-size: 0.9rem;
-        letter-spacing: 1.5px;
-        color: #000000;
-        background: transparent;
-        padding: 0 40px 0 0;
-        text-transform: uppercase;
-    }
-    
-    .header-search-close-btn {
-        background: none;
-        border: none;
-        font-size: 1.3rem;
-        cursor: pointer;
-        color: #000000;
-        padding: 8px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: opacity 0.2s ease;
-    }
-    
-    .header-search-close-btn:hover {
-        opacity: 0.7;
     }
     
     .main-page-title-container {
