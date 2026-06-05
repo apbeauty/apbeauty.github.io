@@ -269,7 +269,7 @@ function setupEventListeners() {
         }
         const mobileDropdownSearch = document.getElementById('mobile-dropdown-search-input');
         if (mobileDropdownSearch) {
-            mobileDropdownSearch.placeholder = isEn ? 'SEARCH' : '검색';
+            mobileDropdownSearch.placeholder = 'SEARCH';
         }
         const mobileDropdownClear = document.getElementById('mobile-dropdown-search-clear');
         if (mobileDropdownClear) {
