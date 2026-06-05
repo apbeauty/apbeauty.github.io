@@ -843,7 +843,7 @@ body.edit-mode .add-block-placeholder {
     
     .mobile-dropdown-search-container {
         position: relative;
-        margin: 10px 24px 4px 24px; /* Reduced margins by 50% */
+        margin: 10px 16px 4px 16px; /* Aligned horizontally with 16px main content padding */
     }
     
     .mobile-dropdown-search-input {
