@@ -688,7 +688,7 @@ body.edit-mode .add-block-placeholder {
         left: 0;
         right: 0;
         background-color: #ffffff;
-        padding: 0 10px 0 20px; /* Right padding reduced to 10px (50% of 20px) */
+        padding: 0 8px 0 16px; /* Aligned left padding with content area (16px), adjusted right padding for optical alignment of hamburger */
         z-index: 1005;
         margin-bottom: 0;
         margin-left: 0;
@@ -715,7 +715,7 @@ body.edit-mode .add-block-placeholder {
     
     .mobile-header-subtitle {
         font-family: var(--font-en), sans-serif;
-        font-size: 15px;
+        font-size: 13.5px; /* Slightly reduced for better spacing on mobile viewports */
         font-weight: 400;
         color: var(--ap-white);
         letter-spacing: 2px;
@@ -730,7 +730,17 @@ body.edit-mode .add-block-placeholder {
     .mobile-actions {
         display: flex;
         align-items: center;
-        gap: 0px; /* Reduced gap to 0px for tighter spacing */
+        gap: 2px; /* Small gap between action buttons */
+    }
+    
+    .mobile-actions::before {
+        content: "";
+        display: block;
+        width: 1px;
+        height: 12px;
+        background-color: rgba(0, 0, 0, 0.15); /* Thin gray vertical separator */
+        margin-right: 8px; /* Spacing between line and EN button */
+        margin-left: 2px; /* Spacing between BRAND GUIDELINE text and line */
     }
     
     .header-action-btn {
