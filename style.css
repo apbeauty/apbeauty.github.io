@@ -842,54 +842,53 @@ body.edit-mode .add-block-placeholder {
     }
     
     .mobile-dropdown-search-container {
-        display: flex;
-        align-items: center;
-        background-color: #fafafa;
-        border: 1px solid var(--ap-border);
-        border-radius: 4px;
+        position: relative;
         margin: 20px 24px 8px 24px;
-        padding: 8px 12px;
-        gap: 8px;
-        transition: border-color 0.2s ease, background-color 0.2s ease;
-    }
-    
-    .mobile-dropdown-search-container:focus-within {
-        border-color: rgba(0, 0, 0, 0.3);
-        background-color: #ffffff;
-    }
-    
-    .mobile-dropdown-search-icon {
-        color: var(--ap-silver);
-        flex-shrink: 0;
     }
     
     .mobile-dropdown-search-input {
-        border: none;
-        background: transparent;
-        font-family: var(--font-en);
-        font-size: 0.95rem;
-        letter-spacing: 0.5px;
         width: 100%;
-        color: var(--ap-white);
+        height: 34px;
+        padding: 0 28px 0 28px; /* Left padding for icon, right padding for clear button */
+        font-family: var(--font-en);
+        font-size: 0.8rem;
+        letter-spacing: 1px;
+        border: 1px solid var(--ap-border);
+        background: transparent;
         outline: none;
-        padding: 0;
+        color: var(--ap-silver);
         box-sizing: border-box;
+        transition: var(--transition-smooth);
     }
     
-    .mobile-dropdown-search-input::placeholder {
-        color: var(--ap-silver);
+    .mobile-dropdown-search-input:focus {
+        border-color: var(--ap-silver);
+    }
+    
+    .mobile-dropdown-search-icon {
+        position: absolute;
+        left: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        pointer-events: none;
+        color: var(--ap-gray);
+        transition: var(--transition-smooth);
     }
     
     .mobile-dropdown-search-clear-btn {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
         background: none;
         border: none;
         cursor: pointer;
-        color: var(--ap-silver);
-        font-size: 1.05rem;
-        padding: 0;
+        color: var(--ap-gray);
+        font-size: 0.85rem;
         display: none; /* Controlled by JS */
         align-items: center;
         justify-content: center;
+        padding: 0;
     }
     
     .mobile-dropdown-search-clear-btn:hover {
