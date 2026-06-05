@@ -91,6 +91,17 @@ let activeSectionId = '';
 let activeBlockId = '';
 let isScrollingManual = false;
 let manualScrollTimer = null;
+let currentLang = 'ko'; // 'ko' or 'en'
+
+function updateLanguageClass() {
+    if (currentLang === 'en') {
+        document.body.classList.add('lang-en');
+        document.body.classList.remove('lang-ko');
+    } else {
+        document.body.classList.add('lang-ko');
+        document.body.classList.remove('lang-en');
+    }
+}
 
 // DOM Elements
 const sidebarLinks = document.getElementById('nav-links');
@@ -101,6 +112,7 @@ const headerNavLinks = document.getElementById('header-nav-links');
 
 // Initialize App
 window.addEventListener('DOMContentLoaded', () => {
+    updateLanguageClass();
     fetchGuidelinesData();
     setupEventListeners();
 });
@@ -237,21 +249,52 @@ function setupEventListeners() {
     const headerLangToggleBtn = document.getElementById('header-lang-toggle-btn');
     
     function toggleLanguage() {
-        const currentLang = (langToggleBtn ? langToggleBtn.textContent.trim() : (headerLangToggleBtn ? headerLangToggleBtn.textContent.trim() : 'KR'));
-        const nextLang = currentLang === 'KR' ? 'EN' : 'KR';
+        currentLang = currentLang === 'ko' ? 'en' : 'ko';
+        updateLanguageClass();
+        const targetLabel = currentLang === 'ko' ? 'EN' : 'KR';
+        const targetTitle = currentLang === 'ko' ? 'Language' : '언어 변경';
         
-        if (langToggleBtn) langToggleBtn.textContent = nextLang;
-        if (headerLangToggleBtn) headerLangToggleBtn.textContent = nextLang;
+        if (langToggleBtn) {
+            langToggleBtn.textContent = targetLabel;
+        }
+        if (headerLangToggleBtn) {
+            headerLangToggleBtn.textContent = targetLabel;
+            headerLangToggleBtn.setAttribute('title', targetTitle);
+        }
         
-        if (nextLang === 'EN') {
-            showToast('Language changed to English (Demo)');
+        // Update browser-native titles on static elements
+        const isEn = currentLang === 'en';
+        const searchClearBtn = document.getElementById('search-clear-btn');
+        if (searchClearBtn) {
+            searchClearBtn.setAttribute('title', isEn ? 'Clear search' : '검색 지우기');
+        }
+        const headerSearchToggle = document.getElementById('header-search-toggle');
+        if (headerSearchToggle) {
+            headerSearchToggle.setAttribute('title', isEn ? 'Search' : '검색');
+        }
+        const mToggleBtn = document.getElementById('menu-toggle-btn');
+        if (mToggleBtn) {
+            mToggleBtn.setAttribute('title', isEn ? 'Menu' : '메뉴');
+        }
+        
+        // Re-render components with translated contents
+        renderSidebar();
+        renderAllSections();
+        updateActiveNavLink(activeSectionId, activeBlockId);
+        
+        // Show toast
+        if (currentLang === 'en') {
+            showToast('Language changed to English');
         } else {
-            showToast('언어가 한국어로 변경되었습니다 (데모)');
+            showToast('언어가 한국어로 변경되었습니다');
         }
     }
     
     if (langToggleBtn) {
         langToggleBtn.addEventListener('click', toggleLanguage);
+    }
+    if (headerLangToggleBtn) {
+        headerLangToggleBtn.addEventListener('click', toggleLanguage);
     }
     if (sidebarLinks) {
         sidebarLinks.addEventListener('mouseleave', () => {
@@ -294,15 +337,17 @@ async function fetchGuidelinesData() {
 
     // If both failed to load, display the error state
     if (!loaded) {
+        const errMsg = currentLang === 'en' ? '⚠️ Could not load guidelines data.' : '⚠️ 가이드라인 데이터를 로드할 수 없습니다.';
+        const subMsg = currentLang === 'en' ? 'Please verify that data.json is in the correct directory.' : 'data.json 파일이 올바르게 위치해 있는지 확인해주세요.';
         sectionsWrapper.innerHTML = `
             <div class="loader-container">
                 <div class="error-msg" style="font-size: 1.2rem; text-align: center;">
-                    ⚠️ 가이드라인 데이터를 로드할 수 없습니다.<br>
-                    <small style="color: var(--ap-gray); font-size: 0.9rem;">data.json 파일이 올바르게 위치해 있는지 확인해주세요.</small>
+                    ${errMsg}<br>
+                    <small style="color: var(--ap-gray); font-size: 0.9rem;">${subMsg}</small>
                 </div>
             </div>
         `;
-        showToast("데이터 로드 실패", true);
+        showToast(currentLang === 'en' ? "Data load failed" : "데이터 로드 실패", true);
     }
 }
 
@@ -323,9 +368,10 @@ function renderSidebar() {
         link.href = `#${section.id}`;
         link.className = `nav-link ${section.id === activeSectionId ? 'active' : ''}`;
         
+        const secTitle = (currentLang === 'en' && section.title_en) ? section.title_en : section.title;
         link.innerHTML = `
             <span style="position: relative; display: inline-block;">
-                ${section.title}
+                ${secTitle}
             </span>
         `;
         
@@ -390,7 +436,7 @@ function renderSidebar() {
                 const subLink = document.createElement('a');
                 subLink.href = `#block-${block.id}`;
                 subLink.className = 'nav-sub-link';
-                let subTitleText = block.title;
+                let subTitleText = (currentLang === 'en' && block.title_en) ? block.title_en : block.title;
                 if (subTitleText.includes('|')) {
                     subTitleText = subTitleText.split('|')[0].trim();
                 }
@@ -435,7 +481,7 @@ function renderSidebar() {
             const mobileLink = document.createElement('a');
             mobileLink.href = `#${section.id}`;
             mobileLink.className = `mobile-menu-link ${section.id === activeSectionId ? 'active' : ''}`;
-            mobileLink.textContent = section.title;
+            mobileLink.textContent = (currentLang === 'en' && section.title_en) ? section.title_en : section.title;
             
             mobileLink.addEventListener('click', (e) => {
                 e.preventDefault();
@@ -588,10 +634,11 @@ function renderAllSections() {
     let html = '';
     
     guidelineData.sections.forEach(section => {
+        const secTitle = (currentLang === 'en' && section.title_en) ? section.title_en : section.title;
         html += `
             <section class="guide-section active" id="section-${section.id}" style="display: block; margin-bottom: 80px; scroll-margin-top: 100px;">
                 <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px;">
-                    <h1 class="section-title" style="margin-bottom: 0;">${section.title}</h1>
+                    <h1 class="section-title" style="margin-bottom: 0;">${secTitle}</h1>
                 </div>
                 
                 <div class="blocks-container">
@@ -602,7 +649,8 @@ function renderAllSections() {
                 html += renderBlockHTML(block, section.id, index, section.blocks.length);
             });
         } else {
-            html += `<div style="text-align: center; color: var(--ap-gray); padding: 40px; border: 1px dashed var(--ap-border); margin-bottom:32px;">현재 섹션에 가이드라인 블록이 없습니다.</div>`;
+            const noBlocksMsg = currentLang === 'en' ? 'There are no guideline blocks in this section.' : '현재 섹션에 가이드라인 블록이 없습니다.';
+            html += `<div style="text-align: center; color: var(--ap-gray); padding: 40px; border: 1px dashed var(--ap-border); margin-bottom:32px;">${noBlocksMsg}</div>`;
         }
         
         html += `
@@ -986,6 +1034,8 @@ function formatContent(text) {
 // Render dynamic 2-column html block
 function renderBlockHTML(block, sectionId, index, totalBlocks) {
     const isLight = document.body.classList.contains('light-theme');
+    const blockTitle = (currentLang === 'en' && block.title_en) ? block.title_en : block.title;
+    const blockContent = (currentLang === 'en' && block.content_en) ? block.content_en : block.content;
     
     if (sectionId === 'applications') {
         const images = (block.image || '').split(',').map(img => img.trim()).filter(Boolean);
@@ -993,7 +1043,7 @@ function renderBlockHTML(block, sectionId, index, totalBlocks) {
         images.forEach(img => {
             visualContent += `
                 <div class="visual-image-frame" style="cursor: default;">
-                    <img src="${img}" alt="${block.title || 'AP BEAUTY'}" loading="lazy" style="width: 100%; height: auto; display: block;">
+                    <img src="${img}" alt="${blockTitle || 'AP BEAUTY'}" loading="lazy" style="width: 100%; height: auto; display: block;">
                 </div>
             `;
         });
@@ -1001,8 +1051,8 @@ function renderBlockHTML(block, sectionId, index, totalBlocks) {
         return `
             <div class="guide-block block-full-width" id="block-${block.id}">
                 <div class="block-header-full-width">
-                    <h2 class="block-title">${block.title}</h2>
-                    ${block.content ? `<div class="text-block-content">${formatContent(block.content)}</div>` : ''}
+                    <h2 class="block-title">${blockTitle}</h2>
+                    ${blockContent ? `<div class="text-block-content">${formatContent(blockContent)}</div>` : ''}
                 </div>
                 
                 <div class="block-visual-column-full-width">
@@ -1272,8 +1322,8 @@ function renderBlockHTML(block, sectionId, index, totalBlocks) {
         const encodedFilePath = encodeURI(block.download_file);
         visualContent = `
             <a href="${encodedFilePath}" download="${block.download_file.split('/').pop()}" style="text-decoration: none; display: block; width: 100%;">
-                <div class="visual-image-frame visual-image-downloadable" title="클릭하여 원본 파일 다운로드">
-                    <img src="${adaptedImage}" alt="${block.title || 'AP BEAUTY'}" loading="lazy" style="width: 100%; height: auto; display: block;">
+                <div class="visual-image-frame visual-image-downloadable" title="${currentLang === 'en' ? 'Click to download the original file' : '클릭하여 원본 파일 다운로드'}">
+                    <img src="${adaptedImage}" alt="${blockTitle || 'AP BEAUTY'}" loading="lazy" style="width: 100%; height: auto; display: block;">
                     <div class="download-icon-badge" style="border-radius: 0;">
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
@@ -1483,163 +1533,6 @@ function renderBlockHTML(block, sectionId, index, totalBlocks) {
                 </svg>
             </div>
         `;
-    } else if (block.id === 'block_wm_5') {
-        visualContent = `
-            <div class="placements-grid">
-                <div class="placement-item">
-                    <svg viewBox="0 -13 356.3 495" style="width: 100%; height: auto; display: block;">
-                        <defs>
-                            <style>
-                                .placement-rect { stroke: #231f20; stroke-width: 0.5px; fill: none; }
-                                .placement-axis { stroke: red; stroke-width: 0.5px; fill: none; }
-                            </style>
-                            <g id="wm-path-wm5-v">
-                                <path d="M48.04,0L0,113.16h19.07l11.72-27.6.32-.77h48.46l.32.77,11.72,27.6h19.07L62.65,0h-14.61ZM73.06,69.47h-35.44l.32-.77,17.4-40.98,17.4,40.98.32.77Z"/>
-                                <polygon points="351.2 62.44 397.8 62.44 397.8 47.11 351.2 47.11 351.2 15.33 401.26 15.33 401.26 0 333.41 0 333.41 113.16 403.51 113.16 403.51 97.83 351.2 97.83 351.2 62.44"/>
-                                <polygon points="614.73 15.33 643 15.33 643 113.16 660.79 113.16 660.79 15.33 689.06 15.33 689.06 0 614.73 0 614.73 15.33"/>
-                                <polygon points="759.28 0 735.96 47.26 712.08 0 692.15 0 727.09 63.3 727.09 113.16 744.88 113.16 744.88 63.28 779.19 0 759.28 0"/>
-                                <path d="M457.94,0l-48.04,113.16h19.07l11.72-27.6.32-.77h48.46l.32.77,11.72,27.6h19.07L472.55,0h-14.61ZM482.96,69.47h-35.44l.32-.77,17.4-40.98,17.4,40.98.32.77Z"/>
-                                <path d="M160.18,0h-38.12v113.16h17.79v-44.1h20.33c24.28,0,40.59-13.88,40.59-34.53S184.45,0,160.18,0ZM168.71,52.39c-2.98.93-5.68,1.14-5.89,1.15-1.26.13-2.52.19-3.75.19h-19.23V15.33h19.23c14.33,0,23.6,7.54,23.6,19.2,0,8.64-5.07,15.15-13.96,17.86Z"/>
-                                <path d="M584.54,64.52c0,25.05-5.7,34.37-21.04,34.37h0c-15.33,0-21.04-9.32-21.04-34.37V0h-17.79v68.04c0,16.83,4.06,29.52,12.06,37.7,6.57,6.71,15.57,10.11,26.76,10.11s20.2-3.4,26.76-10.11c8-8.18,12.06-20.86,12.06-37.7V0h-17.79v64.52Z"/>
-                                <path d="M296.32,51.05c6.89-5.28,10.74-13.06,10.74-21.99,0-24.01-21.04-29.05-38.68-29.05h-28.12v113.16h36.54c24.87,0,39.13-12.23,39.13-33.57,0-13.54-6.26-22.72-19.62-28.55ZM258.05,15.33h10.32c9.54,0,20.92,2.82,20.92,13.57,0,11.36-9.37,16.56-27.84,16.56h-3.39V15.33ZM269.28,97.83h-11.23v-36.75h3.35c22.21,0,33.62,4.18,36.09,14.26.04.17.06.37.1.55.27,1.26.42,2.6.42,4.04,0,14.32-15.63,17.9-28.74,17.9Z"/>
-                            </g>
-                        </defs>
-                        <rect class="placement-rect" x="15" y="10" width="326.3" height="449.2"/>
-                        <line class="placement-axis" x1="178.15" y1="476.2" x2="178.15" y2="-7"/>
-                        <line class="placement-axis" x1="2.2" y1="234.6" x2="354.1" y2="234.6"/>
-                        <use href="#wm-path-wm5-v" fill="#000000" transform="translate(109.2, 224.4) scale(0.1770)" />
-                    </svg>
-                    <div class="placement-label-desc">Vertical Format (Centered)</div>
-                </div>
-                <div class="placement-item">
-                    <svg viewBox="0 -21 479.2 388" style="width: 100%; height: auto; display: block;">
-                        <defs>
-                            <style>
-                                .placement-rect { stroke: #231f20; stroke-width: 0.5px; fill: none; }
-                                .placement-axis { stroke: red; stroke-width: 0.5px; fill: none; }
-                            </style>
-                            <g id="wm-path-wm5-h">
-                                <path d="M48.04,0L0,113.16h19.07l11.72-27.6.32-.77h48.46l.32.77,11.72,27.6h19.07L62.65,0h-14.61ZM73.06,69.47h-35.44l.32-.77,17.4-40.98,17.4,40.98.32.77Z"/>
-                                <polygon points="351.2 62.44 397.8 62.44 397.8 47.11 351.2 47.11 351.2 15.33 401.26 15.33 401.26 0 333.41 0 333.41 113.16 403.51 113.16 403.51 97.83 351.2 97.83 351.2 62.44"/>
-                                <polygon points="614.73 15.33 643 15.33 643 113.16 660.79 113.16 660.79 15.33 689.06 15.33 689.06 0 614.73 0 614.73 15.33"/>
-                                <polygon points="759.28 0 735.96 47.26 712.08 0 692.15 0 727.09 63.3 727.09 113.16 744.88 113.16 744.88 63.28 779.19 0 759.28 0"/>
-                                <path d="M457.94,0l-48.04,113.16h19.07l11.72-27.6.32-.77h48.46l.32.77,11.72,27.6h19.07L472.55,0h-14.61ZM482.96,69.47h-35.44l.32-.77,17.4-40.98,17.4,40.98.32.77Z"/>
-                                <path d="M160.18,0h-38.12v113.16h17.79v-44.1h20.33c24.28,0,40.59-13.88,40.59-34.53S184.45,0,160.18,0ZM168.71,52.39c-2.98.93-5.68,1.14-5.89,1.15-1.26.13-2.52.19-3.75.19h-19.23V15.33h19.23c14.33,0,23.6,7.54,23.6,19.2,0,8.64-5.07,15.15-13.96,17.86Z"/>
-                                <path d="M584.54,64.52c0,25.05-5.7,34.37-21.04,34.37h0c-15.33,0-21.04-9.32-21.04-34.37V0h-17.79v68.04c0,16.83,4.06,29.52,12.06,37.7,6.57,6.71,15.57,10.11,26.76,10.11s20.2-3.4,26.76-10.11c8-8.18,12.06-20.86,12.06-37.7V0h-17.79v64.52Z"/>
-                                <path d="M296.32,51.05c6.89-5.28,10.74-13.06,10.74-21.99,0-24.01-21.04-29.05-38.68-29.05h-28.12v113.16h36.54c24.87,0,39.13-12.23,39.13-33.57,0-13.54-6.26-22.72-19.62-28.55ZM258.05,15.33h10.32c9.54,0,20.92,2.82,20.92,13.57,0,11.36-9.37,16.56-27.84,16.56h-3.39V15.33ZM269.28,97.83h-11.23v-36.75h3.35c22.21,0,33.62,4.18,36.09,14.26.04.17.06.37.1.55.27,1.26.42,2.6.42,4.04,0,14.32-15.63,17.9-28.74,17.9Z"/>
-                            </g>
-                        </defs>
-                        <rect class="placement-rect" x="15" y="10" width="449.2" height="326.3"/>
-                        <line class="placement-axis" x1="239.6" y1="360.7" x2="239.6" y2="-14.5"/>
-                        <line class="placement-axis" x1="5.9" y1="173.1" x2="473.2" y2="173.1"/>
-                        <use href="#wm-path-wm5-h" fill="#000000" transform="translate(170.64, 162.9) scale(0.1770)" />
-                    </svg>
-                    <div class="placement-label-desc">Horizontal Format (Centered)</div>
-                </div>
-                <div class="placement-item">
-                    <svg viewBox="0 -21 410.2 437.5" style="width: 100%; height: auto; display: block;">
-                        <defs>
-                            <style>
-                                .placement-rect { stroke: #231f20; stroke-width: 0.5px; fill: none; }
-                                .placement-axis { stroke: red; stroke-width: 0.5px; fill: none; }
-                            </style>
-                            <g id="wm-path-wm5-s">
-                                <path d="M48.04,0L0,113.16h19.07l11.72-27.6.32-.77h48.46l.32.77,11.72,27.6h19.07L62.65,0h-14.61ZM73.06,69.47h-35.44l.32-.77,17.4-40.98,17.4,40.98.32.77Z"/>
-                                <polygon points="351.2 62.44 397.8 62.44 397.8 47.11 351.2 47.11 351.2 15.33 401.26 15.33 401.26 0 333.41 0 333.41 113.16 403.51 113.16 403.51 97.83 351.2 97.83 351.2 62.44"/>
-                                <polygon points="614.73 15.33 643 15.33 643 113.16 660.79 113.16 660.79 15.33 689.06 15.33 689.06 0 614.73 0 614.73 15.33"/>
-                                <polygon points="759.28 0 735.96 47.26 712.08 0 692.15 0 727.09 63.3 727.09 113.16 744.88 113.16 744.88 63.28 779.19 0 759.28 0"/>
-                                <path d="M457.94,0l-48.04,113.16h19.07l11.72-27.6.32-.77h48.46l.32.77,11.72,27.6h19.07L472.55,0h-14.61ZM482.96,69.47h-35.44l.32-.77,17.4-40.98,17.4,40.98.32.77Z"/>
-                                <path d="M160.18,0h-38.12v113.16h17.79v-44.1h20.33c24.28,0,40.59-13.88,40.59-34.53S184.45,0,160.18,0ZM168.71,52.39c-2.98.93-5.68,1.14-5.89,1.15-1.26.13-2.52.19-3.75.19h-19.23V15.33h19.23c14.33,0,23.6,7.54,23.6,19.2,0,8.64-5.07,15.15-13.96,17.86Z"/>
-                                <path d="M584.54,64.52c0,25.05-5.7,34.37-21.04,34.37h0c-15.33,0-21.04-9.32-21.04-34.37V0h-17.79v68.04c0,16.83,4.06,29.52,12.06,37.7,6.57,6.71,15.57,10.11,26.76,10.11s20.2-3.4,26.76-10.11c8-8.18,12.06-20.86,12.06-37.7V0h-17.79v64.52Z"/>
-                                <path d="M296.32,51.05c6.89-5.28,10.74-13.06,10.74-21.99,0-24.01-21.04-29.05-38.68-29.05h-28.12v113.16h36.54c24.87,0,39.13-12.23,39.13-33.57,0-13.54-6.26-22.72-19.62-28.55ZM258.05,15.33h10.32c9.54,0,20.92,2.82,20.92,13.57,0,11.36-9.37,16.56-27.84,16.56h-3.39V15.33ZM269.28,97.83h-11.23v-36.75h3.35c22.21,0,33.62,4.18,36.09,14.26.04.17.06.37.1.55.27,1.26.42,2.6.42,4.04,0,14.32-15.63,17.9-28.74,17.9Z"/>
-                            </g>
-                        </defs>
-                        <rect class="placement-rect" x="15" y="10" width="380.2" height="380.2"/>
-                        <line class="placement-axis" x1="205.1" y1="414.4" x2="205.1" y2="-14.3"/>
-                        <line class="placement-axis" x1="5.1" y1="200" x2="405.1" y2="200"/>
-                        <use href="#wm-path-wm5-s" fill="#000000" transform="translate(136.14, 189.8) scale(0.1770)" />
-                    </svg>
-                    <div class="placement-label-desc">Square Format (Centered)</div>
-                </div>
-            </div>
-        `;
-    } else if (block.id === 'block_wm_6') {
-        visualContent = `
-            <div class="placements-grid">
-                <div class="placement-item">
-                    <svg viewBox="0 -13 356.3 495" style="width: 100%; height: auto; display: block;">
-                        <defs>
-                            <style>
-                                .placement-rect { stroke: #231f20; stroke-width: 0.5px; fill: none; }
-                                .placement-axis { stroke: red; stroke-width: 0.5px; fill: none; }
-                            </style>
-                            <g id="wm-path-wm6-v">
-                                <path d="M48.04,0L0,113.16h19.07l11.72-27.6.32-.77h48.46l.32.77,11.72,27.6h19.07L62.65,0h-14.61ZM73.06,69.47h-35.44l.32-.77,17.4-40.98,17.4,40.98.32.77Z"/>
-                                <polygon points="351.2 62.44 397.8 62.44 397.8 47.11 351.2 47.11 351.2 15.33 401.26 15.33 401.26 0 333.41 0 333.41 113.16 403.51 113.16 403.51 97.83 351.2 97.83 351.2 62.44"/>
-                                <polygon points="614.73 15.33 643 15.33 643 113.16 660.79 113.16 660.79 15.33 689.06 15.33 689.06 0 614.73 0 614.73 15.33"/>
-                                <polygon points="759.28 0 735.96 47.26 712.08 0 692.15 0 727.09 63.3 727.09 113.16 744.88 113.16 744.88 63.28 779.19 0 759.28 0"/>
-                                <path d="M457.94,0l-48.04,113.16h19.07l11.72-27.6.32-.77h48.46l.32.77,11.72,27.6h19.07L472.55,0h-14.61ZM482.96,69.47h-35.44l.32-.77,17.4-40.98,17.4,40.98.32.77Z"/>
-                                <path d="M160.18,0h-38.12v113.16h17.79v-44.1h20.33c24.28,0,40.59-13.88,40.59-34.53S184.45,0,160.18,0ZM168.71,52.39c-2.98.93-5.68,1.14-5.89,1.15-1.26.13-2.52.19-3.75.19h-19.23V15.33h19.23c14.33,0,23.6,7.54,23.6,19.2,0,8.64-5.07,15.15-13.96,17.86Z"/>
-                                <path d="M584.54,64.52c0,25.05-5.7,34.37-21.04,34.37h0c-15.33,0-21.04-9.32-21.04-34.37V0h-17.79v68.04c0,16.83,4.06,29.52,12.06,37.7,6.57,6.71,15.57,10.11,26.76,10.11s20.2-3.4,26.76-10.11c8-8.18,12.06-20.86,12.06-37.7V0h-17.79v64.52Z"/>
-                                <path d="M296.32,51.05c6.89-5.28,10.74-13.06,10.74-21.99,0-24.01-21.04-29.05-38.68-29.05h-28.12v113.16h36.54c24.87,0,39.13-12.23,39.13-33.57,0-13.54-6.26-22.72-19.62-28.55ZM258.05,15.33h10.32c9.54,0,20.92,2.82,20.92,13.57,0,11.36-9.37,16.56-27.84,16.56h-3.39V15.33ZM269.28,97.83h-11.23v-36.75h3.35c22.21,0,33.62,4.18,36.09,14.26.04.17.06.37.1.55.27,1.26.42,2.6.42,4.04,0,14.32-15.63,17.9-28.74,17.9Z"/>
-                            </g>
-                        </defs>
-                        <rect class="placement-rect" x="15" y="10" width="326.3" height="449.2"/>
-                        <line class="placement-axis" x1="178.15" y1="476.2" x2="178.15" y2="-7"/>
-                        <use href="#wm-path-wm6-v" fill="#000000" transform="translate(109.2, 60.3) scale(0.1770)" />
-                    </svg>
-                    <div class="placement-label-desc">Vertical Format (Centered, Top Aligned)</div>
-                </div>
-                <div class="placement-item">
-                    <svg viewBox="0 -21 479.2 388" style="width: 100%; height: auto; display: block;">
-                        <defs>
-                            <style>
-                                .placement-rect { stroke: #231f20; stroke-width: 0.5px; fill: none; }
-                                .placement-axis { stroke: red; stroke-width: 0.5px; fill: none; }
-                            </style>
-                            <g id="wm-path-wm6-h">
-                                <path d="M48.04,0L0,113.16h19.07l11.72-27.6.32-.77h48.46l.32.77,11.72,27.6h19.07L62.65,0h-14.61ZM73.06,69.47h-35.44l.32-.77,17.4-40.98,17.4,40.98.32.77Z"/>
-                                <polygon points="351.2 62.44 397.8 62.44 397.8 47.11 351.2 47.11 351.2 15.33 401.26 15.33 401.26 0 333.41 0 333.41 113.16 403.51 113.16 403.51 97.83 351.2 97.83 351.2 62.44"/>
-                                <polygon points="614.73 15.33 643 15.33 643 113.16 660.79 113.16 660.79 15.33 689.06 15.33 689.06 0 614.73 0 614.73 15.33"/>
-                                <polygon points="759.28 0 735.96 47.26 712.08 0 692.15 0 727.09 63.3 727.09 113.16 744.88 113.16 744.88 63.28 779.19 0 759.28 0"/>
-                                <path d="M457.94,0l-48.04,113.16h19.07l11.72-27.6.32-.77h48.46l.32.77,11.72,27.6h19.07L472.55,0h-14.61ZM482.96,69.47h-35.44l.32-.77,17.4-40.98,17.4,40.98.32.77Z"/>
-                                <path d="M160.18,0h-38.12v113.16h17.79v-44.1h20.33c24.28,0,40.59-13.88,40.59-34.53S184.45,0,160.18,0ZM168.71,52.39c-2.98.93-5.68,1.14-5.89,1.15-1.26.13-2.52.19-3.75.19h-19.23V15.33h19.23c14.33,0,23.6,7.54,23.6,19.2,0,8.64-5.07,15.15-13.96,17.86Z"/>
-                                <path d="M584.54,64.52c0,25.05-5.7,34.37-21.04,34.37h0c-15.33,0-21.04-9.32-21.04-34.37V0h-17.79v68.04c0,16.83,4.06,29.52,12.06,37.7,6.57,6.71,15.57,10.11,26.76,10.11s20.2-3.4,26.76-10.11c8-8.18,12.06-20.86,12.06-37.7V0h-17.79v64.52Z"/>
-                                <path d="M296.32,51.05c6.89-5.28,10.74-13.06,10.74-21.99,0-24.01-21.04-29.05-38.68-29.05h-28.12v113.16h36.54c24.87,0,39.13-12.23,39.13-33.57,0-13.54-6.26-22.72-19.62-28.55ZM258.05,15.33h10.32c9.54,0,20.92,2.82,20.92,13.57,0,11.36-9.37,16.56-27.84,16.56h-3.39V15.33ZM269.28,97.83h-11.23v-36.75h3.35c22.21,0,33.62,4.18,36.09,14.26.04.17.06.37.1.55.27,1.26.42,2.6.42,4.04,0,14.32-15.63,17.9-28.74,17.9Z"/>
-                            </g>
-                        </defs>
-                        <rect class="placement-rect" x="15" y="10" width="449.2" height="326.3"/>
-                        <line class="placement-axis" x1="239.6" y1="360.7" x2="239.6" y2="-14.5"/>
-                        <use href="#wm-path-wm6-h" fill="#000000" transform="translate(170.64, 58.6) scale(0.1770)" />
-                    </svg>
-                    <div class="placement-label-desc">Horizontal Format (Centered, Top Aligned)</div>
-                </div>
-                <div class="placement-item">
-                    <svg viewBox="0 -21 410.2 437.5" style="width: 100%; height: auto; display: block;">
-                        <defs>
-                            <style>
-                                .placement-rect { stroke: #231f20; stroke-width: 0.5px; fill: none; }
-                                .placement-axis { stroke: red; stroke-width: 0.5px; fill: none; }
-                            </style>
-                            <g id="wm-path-wm6-s">
-                                <path d="M48.04,0L0,113.16h19.07l11.72-27.6.32-.77h48.46l.32.77,11.72,27.6h19.07L62.65,0h-14.61ZM73.06,69.47h-35.44l.32-.77,17.4-40.98,17.4,40.98.32.77Z"/>
-                                <polygon points="351.2 62.44 397.8 62.44 397.8 47.11 351.2 47.11 351.2 15.33 401.26 15.33 401.26 0 333.41 0 333.41 113.16 403.51 113.16 403.51 97.83 351.2 97.83 351.2 62.44"/>
-                                <polygon points="614.73 15.33 643 15.33 643 113.16 660.79 113.16 660.79 15.33 689.06 15.33 689.06 0 614.73 0 614.73 15.33"/>
-                                <polygon points="759.28 0 735.96 47.26 712.08 0 692.15 0 727.09 63.3 727.09 113.16 744.88 113.16 744.88 63.28 779.19 0 759.28 0"/>
-                                <path d="M457.94,0l-48.04,113.16h19.07l11.72-27.6.32-.77h48.46l.32.77,11.72,27.6h19.07L472.55,0h-14.61ZM482.96,69.47h-35.44l.32-.77,17.4-40.98,17.4,40.98.32.77Z"/>
-                                <path d="M160.18,0h-38.12v113.16h17.79v-44.1h20.33c24.28,0,40.59-13.88,40.59-34.53S184.45,0,160.18,0ZM168.71,52.39c-2.98.93-5.68,1.14-5.89,1.15-1.26.13-2.52.19-3.75.19h-19.23V15.33h19.23c14.33,0,23.6,7.54,23.6,19.2,0,8.64-5.07,15.15-13.96,17.86Z"/>
-                                <path d="M584.54,64.52c0,25.05-5.7,34.37-21.04,34.37h0c-15.33,0-21.04-9.32-21.04-34.37V0h-17.79v68.04c0,16.83,4.06,29.52,12.06,37.7,6.57,6.71,15.57,10.11,26.76,10.11s20.2-3.4,26.76-10.11c8-8.18,12.06-20.86,12.06-37.7V0h-17.79v64.52Z"/>
-                                <path d="M296.32,51.05c6.89-5.28,10.74-13.06,10.74-21.99,0-24.01-21.04-29.05-38.68-29.05h-28.12v113.16h36.54c24.87,0,39.13-12.23,39.13-33.57,0-13.54-6.26-22.72-19.62-28.55ZM258.05,15.33h10.32c9.54,0,20.92,2.82,20.92,13.57,0,11.36-9.37,16.56-27.84,16.56h-3.39V15.33ZM269.28,97.83h-11.23v-36.75h3.35c22.21,0,33.62,4.18,36.09,14.26.04.17.06.37.1.55.27,1.26.42,2.6.42,4.04,0,14.32-15.63,17.9-28.74,17.9Z"/>
-                            </g>
-                        </defs>
-                        <rect class="placement-rect" x="15" y="10" width="380.2" height="380.2"/>
-                        <line class="placement-axis" x1="205.1" y1="414.4" x2="205.1" y2="-14.3"/>
-                        <use href="#wm-path-wm6-s" fill="#000000" transform="translate(136.14, 59.2) scale(0.1770)" />
-                    </svg>
-                    <div class="placement-label-desc">Square Format (Centered, Top Aligned)</div>
-                </div>
-            </div>
-        `;
     } else if (block.id === 'block_wm_7') {
         // Inline SVG path data for reliable cross-browser rendering
         const apPaths = '<path d="M48.04,0L0,113.16h19.07l11.72-27.6.32-.77h48.46l.32.77,11.72,27.6h19.07L62.65,0h-14.61ZM73.06,69.47h-35.44l.32-.77,17.4-40.98,17.4,40.98.32.77Z"/><path d="M160.18,0h-38.12v113.16h17.79v-44.1h20.33c24.28,0,40.59-13.88,40.59-34.53S184.45,0,160.18,0ZM168.71,52.39c-2.98.93-5.68,1.14-5.89,1.15-1.26.13-2.52.19-3.75.19h-19.23V15.33h19.23c14.33,0,23.6,7.54,23.6,19.2,0,8.64-5.07,15.15-13.96,17.86Z"/>';
@@ -1649,6 +1542,7 @@ function renderBlockHTML(block, sectionId, index, totalBlocks) {
         const incorrectItems = [
             {
                 title_ko: "방향을 변경하는 경우",
+                title_en: "Altering the orientation",
                 svg: `
                     <svg viewBox="0 0 240 144" style="width: 100%; height: auto; display: block;">
                         <rect width="240" height="144" fill="#ffffff" />
@@ -1659,6 +1553,7 @@ function renderBlockHTML(block, sectionId, index, totalBlocks) {
             },
             {
                 title_ko: "비율을 임의로 조정하는 경우",
+                title_en: "Distorting the proportions",
                 svg: `
                     <svg viewBox="0 0 240 144" style="width: 100%; height: auto; display: block;">
                         <rect width="240" height="144" fill="#ffffff" />
@@ -1669,6 +1564,7 @@ function renderBlockHTML(block, sectionId, index, totalBlocks) {
             },
             {
                 title_ko: "기울기를 적용하는 경우",
+                title_en: "Applying a slant or skew",
                 svg: `
                     <svg viewBox="0 0 240 144" style="width: 100%; height: auto; display: block;">
                         <rect width="240" height="144" fill="#ffffff" />
@@ -1679,6 +1575,7 @@ function renderBlockHTML(block, sectionId, index, totalBlocks) {
             },
             {
                 title_ko: "요소의 크기나 형태, 위치, 굵기를 변형하는 경우",
+                title_en: "Modifying the elements size or position",
                 svg: `
                     <svg viewBox="0 0 240 144" style="width: 100%; height: auto; display: block;">
                         <rect width="240" height="144" fill="#ffffff" />
@@ -1690,6 +1587,7 @@ function renderBlockHTML(block, sectionId, index, totalBlocks) {
             },
             {
                 title_ko: "임의의 폰트를 활용하여 다른 형태로 만드는 경우",
+                title_en: "Recreating with an arbitrary font",
                 svg: `
                     <svg viewBox="0 0 240 144" style="width: 100%; height: auto; display: block;">
                         <rect width="240" height="144" fill="#ffffff" />
@@ -1700,10 +1598,11 @@ function renderBlockHTML(block, sectionId, index, totalBlocks) {
             },
             {
                 title_ko: "대비가 낮은 컬러나 이미지와 조합하여 가시성이 낮은경우",
+                title_en: "Low visibility due to low-contrast backgrounds",
                 svg: `
                     <svg viewBox="0 0 240 144" style="width: 100%; height: auto; display: block;">
                         <defs>
-                            <pattern id="inc-busy-pattern" width="12" height="12" patternUnits="userSpaceOnUse">
+                             <pattern id="inc-busy-pattern" width="12" height="12" patternUnits="userSpaceOnUse">
                                 <rect width="12" height="12" fill="#202630" />
                                 <path d="M 12 0 L 0 12 M 0 0 L 12 12" stroke="#35383f" stroke-width="1.5" />
                             </pattern>
@@ -1718,12 +1617,13 @@ function renderBlockHTML(block, sectionId, index, totalBlocks) {
 
         let gridHtml = '';
         incorrectItems.forEach(item => {
+            const label = currentLang === 'en' ? item.title_en : item.title_ko;
             gridHtml += `
                 <div class="incorrect-item">
                     <div class="incorrect-preview">
                         ${item.svg}
                         <div class="incorrect-warning-badge">✕</div>
-                        <div class="incorrect-label">${item.title_ko}</div>
+                        <div class="incorrect-label">${label}</div>
                     </div>
                 </div>
             `;
@@ -1736,8 +1636,8 @@ function renderBlockHTML(block, sectionId, index, totalBlocks) {
         `;
     } else if (block.id === 'block_mono_2') {
         visualContent = `
-            <div class="visual-image-frame" style="max-width: 384px; margin: 0 auto; width: 100%; padding: 24px; background-color: #ffffff; box-sizing: border-box;">
-                <svg viewBox="0 0 573.5 755.1" style="width: 100%; height: auto; display: block;">
+            <div class="visual-image-frame" style="max-width: 442px; margin: 0 auto; width: 100%; padding: 0 24px 8px 24px; background-color: #ffffff; box-sizing: border-box;">
+                <svg viewBox="0 90 573.5 540" style="width: 100%; height: auto; display: block;">
                     <defs>
                         <style>
                             .mono-sys-grid {
@@ -1779,17 +1679,17 @@ function renderBlockHTML(block, sectionId, index, totalBlocks) {
                         </style>
                     </defs>
                     <!-- Grid Lines -->
-                    <line class="mono-sys-grid" x1="239.4" y1="9.2" x2="239.4" y2="740.7"/>
-                    <line class="mono-sys-grid" x1="257.9" y1="9.2" x2="257.9" y2="740.7"/>
-                    <line class="mono-sys-grid" x1="425" y1="9.2" x2="425" y2="740.7"/>
-                    <line class="mono-sys-grid" x1="110.5" y1="9.2" x2="110.5" y2="740.7"/>
+                    <line class="mono-sys-grid" x1="239.4" y1="90" x2="239.4" y2="610"/>
+                    <line class="mono-sys-grid" x1="257.9" y1="90" x2="257.9" y2="610"/>
+                    <line class="mono-sys-grid" x1="425" y1="90" x2="425" y2="610"/>
+                    <line class="mono-sys-grid" x1="110.5" y1="90" x2="110.5" y2="610"/>
                     <line class="mono-sys-grid" x1="110.5" y1="448.8" x2="573.5" y2="448.8"/>
                     <line class="mono-sys-grid" x1="110.5" y1="560.2" x2="573.5" y2="560.2"/>
                     <line class="mono-sys-grid" x1="110.5" y1="168.7" x2="573.5" y2="168.7"/>
                     <line class="mono-sys-grid" x1="110.5" y1="289.7" x2="573.5" y2="289.7"/>
                     
                     <!-- Diagonal Guide -->
-                    <line class="mono-sys-diag" x1="289.8" y1="26" x2="24.2" y2="651.6"/>
+                    <line class="mono-sys-diag" x1="262.8" y1="90" x2="41.9" y2="610"/>
                     
                     <!-- 23 Degree Wedge -->
                     <path class="mono-sys-wedge" d="M110.5,352.3h0c13.5,0,26.1,2.7,37.8,7.6l-37.8,88.9v-96.5Z"/>
@@ -1806,19 +1706,19 @@ function renderBlockHTML(block, sectionId, index, totalBlocks) {
                         <polygon class="mono-sys-arrow" points="505.8,287.1 507.3,289.7 508.8,287.1"/>
                     </g>
                     <g>
-                        <line class="mono-sys-dim-line" x1="237.2" y1="653.7" x2="112.6" y2="653.7"/>
-                        <polygon class="mono-sys-arrow" points="236.8,652.2 239.4,653.7 236.8,655.2"/>
-                        <polygon class="mono-sys-arrow" points="113.1,652.2 110.5,653.7 113.1,655.2"/>
+                        <line class="mono-sys-dim-line" x1="237.2" y1="600" x2="112.6" y2="600"/>
+                        <polygon class="mono-sys-arrow" points="236.8,598.5 239.4,600 236.8,601.5"/>
+                        <polygon class="mono-sys-arrow" points="113.1,598.5 110.5,600 113.1,601.5"/>
                     </g>
                     <g>
-                        <line class="mono-sys-dim-line" x1="422.9" y1="653.7" x2="260.1" y2="653.7"/>
-                        <polygon class="mono-sys-arrow" points="422.4,652.2 425,653.7 422.4,655.2"/>
-                        <polygon class="mono-sys-arrow" points="260.5,652.2 257.9,653.7 260.5,655.2"/>
+                        <line class="mono-sys-dim-line" x1="422.9" y1="600" x2="260.1" y2="600"/>
+                        <polygon class="mono-sys-arrow" points="422.4,598.5 425,600 422.4,601.5"/>
+                        <polygon class="mono-sys-arrow" points="260.5,598.5 257.9,600 260.5,601.5"/>
                     </g>
                     
                     <!-- Dimension Text Labels -->
-                    <text class="mono-sys-text" x="162.8" y="676.6" text-anchor="middle">8.1</text>
-                    <text class="mono-sys-text" x="315.5" y="676.6" text-anchor="middle">10.05</text>
+                    <text class="mono-sys-text" x="174.95" y="622.9" text-anchor="middle">8.1</text>
+                    <text class="mono-sys-text" x="341.45" y="622.9" text-anchor="middle">10.05</text>
                     <text class="mono-sys-text" x="514.6" y="509.6">7</text>
                     <text class="mono-sys-text" x="514.6" y="235.2">10A</text>
                     <text class="mono-sys-text-orange" x="120.9" y="344.4">23°</text>
@@ -1827,6 +1727,59 @@ function renderBlockHTML(block, sectionId, index, totalBlocks) {
                     <g fill="#02060f" transform="translate(110.5, 168.7) scale(1.0038)">
                         <path d="M217.5,120.49h-27.97L138.39,0h-19.95L0,279.02h19.33l32.02-75.42h77.07v186.4h18.44v-110.98h70.64c58.21,0,95.82-31.12,95.82-79.27s-37.61-79.27-95.82-79.27ZM58.09,187.71L128.41,22.04l41.79,98.45h-41.79v67.22H58.09ZM146.85,263.13v-126.76h30.09l53.57,126.21c-3.53.35-7.16.55-10.91.55h-72.76ZM248.35,259.07l-52.08-122.69h23.34c44.51,0,74.42,25.47,74.42,63.38,0,29-17.52,50.71-45.68,59.31Z"/>
                     </g>
+                </svg>
+            </div>
+        `;
+    } else if (block.id === 'block_mono_3') {
+        visualContent = `
+            <div class="visual-image-frame" style="cursor: default; max-width: 400px; margin: 0 auto; width: 100%;">
+                <svg viewBox="0 0 620 516" style="width: 100%; height: auto; display: block;">
+                    <!-- Background -->
+                    <rect width="620" height="516" fill="#ffffff" />
+                    
+                    <!-- Exclusion Zone Bands (Light Gray #f2f2f2) -->
+                    <rect x="140" y="0" width="320" height="80" fill="#f2f2f2" />
+                    <rect x="140" y="435.2" width="320" height="80" fill="#f2f2f2" />
+                    <rect x="60" y="80" width="80" height="355.2" fill="#f2f2f2" />
+                    <rect x="460" y="80" width="80" height="355.2" fill="#f2f2f2" />
+                    
+                    <!-- Corner Squares (Darker Gray #a3a3a3) -->
+                    <rect x="60" y="0" width="80" height="80" fill="#a3a3a3" />
+                    <rect x="460" y="0" width="80" height="80" fill="#a3a3a3" />
+                    <rect x="60" y="435.2" width="80" height="80" fill="#a3a3a3" />
+                    <rect x="460" y="435.2" width="80" height="80" fill="#a3a3a3" />
+                    
+                    <!-- Dotted guidelines -->
+                    <!-- Horizontal guidelines -->
+                    <line x1="60" y1="0" x2="540" y2="0" stroke="#c0c0c0" stroke-width="1.2" stroke-dasharray="4,4" />
+                    <line x1="60" y1="80" x2="540" y2="80" stroke="#c0c0c0" stroke-width="1.2" stroke-dasharray="4,4" />
+                    <line x1="60" y1="257.6" x2="540" y2="257.6" stroke="#c0c0c0" stroke-width="1.2" stroke-dasharray="4,4" opacity="0.5" />
+                    <line x1="60" y1="435.2" x2="540" y2="435.2" stroke="#c0c0c0" stroke-width="1.2" stroke-dasharray="4,4" />
+                    <line x1="60" y1="515.2" x2="540" y2="515.2" stroke="#c0c0c0" stroke-width="1.2" stroke-dasharray="4,4" />
+                    
+                    <!-- Vertical guidelines -->
+                    <line x1="60" y1="0" x2="60" y2="515.2" stroke="#c0c0c0" stroke-width="1.2" stroke-dasharray="4,4" />
+                    <line x1="140" y1="0" x2="140" y2="515.2" stroke="#c0c0c0" stroke-width="1.2" stroke-dasharray="4,4" />
+                    <line x1="300" y1="0" x2="300" y2="515.2" stroke="#c0c0c0" stroke-width="1.2" stroke-dasharray="4,4" />
+                    <line x1="460" y1="0" x2="460" y2="515.2" stroke="#c0c0c0" stroke-width="1.2" stroke-dasharray="4,4" />
+                    <line x1="540" y1="0" x2="540" y2="515.2" stroke="#c0c0c0" stroke-width="1.2" stroke-dasharray="4,4" />
+                    
+                    <!-- Monogram Graphic -->
+                    <g fill="#02060f" transform="translate(174.7, 80) scale(0.9108)">
+                        <path d="M217.5,120.49h-27.97L138.39,0h-19.95L0,279.02h19.33l32.02-75.42h77.07v186.4h18.44v-110.98h70.64c58.21,0,95.82-31.12,95.82-79.27s-37.61-79.27-95.82-79.27ZM58.09,187.71L128.41,22.04l41.79,98.45h-41.79v67.22H58.09ZM146.85,263.13v-126.76h30.09l53.57,126.21c-3.53.35-7.16.55-10.91.55h-72.76ZM248.35,259.07l-52.08-122.69h23.34c44.51,0,74.42,25.47,74.42,63.38,0,29-17.52,50.71-45.68,59.31Z"/>
+                    </g>
+                    
+                    <!-- Dimension Line: 'a' inside Monogram (Red) -->
+                    <line x1="300" y1="470" x2="460" y2="470" stroke="#ff0000" stroke-width="1.2" />
+                    <line x1="300" y1="465" x2="300" y2="475" stroke="#ff0000" stroke-width="1.2" />
+                    <line x1="460" y1="465" x2="460" y2="475" stroke="#ff0000" stroke-width="1.2" />
+                    <text x="380" y="456" fill="#ff0000" font-family="var(--font-en)" font-size="22.5px" font-weight="400" text-anchor="middle">a</text>
+                    
+                    <!-- Dimension Line - Bottom Right Exclusion '0.5a' (Gray) -->
+                    <line x1="548" y1="435.2" x2="558" y2="435.2" stroke="#a0a0a0" stroke-width="1.2" />
+                    <line x1="548" y1="515.2" x2="558" y2="515.2" stroke="#a0a0a0" stroke-width="1.2" />
+                    <line x1="553" y1="435.2" x2="553" y2="515.2" stroke="#a0a0a0" stroke-width="1.2" />
+                    <text x="565" y="475.2" fill="#000000" font-family="var(--font-en)" font-size="21px" font-weight="400" text-anchor="start" dominant-baseline="middle">0.5a</text>
                 </svg>
             </div>
         `;
@@ -1866,7 +1819,7 @@ function renderBlockHTML(block, sectionId, index, totalBlocks) {
         `;
     } else if (block.id === 'block_mono_6') {
         visualContent = `
-            <div style="max-width: 320px; margin: 0 auto; width: 100%;">
+            <div style="max-width: 273.6px; margin: 0 auto; width: 100%;">
                 <div class="placement-item" style="padding-bottom: 0;">
                     <svg viewBox="0 85 398 470" style="width: 100%; height: auto; display: block;">
                         <path d="M288.8,238.7h-31.5l-57.7-135.9h-22.5L43.4,417.6h21.8l36.1-85.1h86.9v210.3h20.8v-125.2h79.7c65.7,0,108.1-35.1,108.1-89.4s-42.4-89.4-108.1-89.4h0ZM109,314.5l79.3-186.9,47.1,111.1h-47.1v75.8h-79.3ZM209.1,399.6v-143h33.9l60.4,142.4c-4,.4-8.1.6-12.3.6h-82.1ZM323.6,395.1l-58.8-138.4h26.3c50.2,0,84,28.7,84,71.5s-19.8,57.2-51.5,66.9h0Z" fill="#02060f"/>
@@ -1877,159 +1830,51 @@ function renderBlockHTML(block, sectionId, index, totalBlocks) {
                 </div>
             </div>
         `;
-    } else if (block.id === 'block_mono_7') {
-        visualContent = `
-            <div class="placements-grid">
-                <div class="placement-item">
-                    <svg viewBox="0 -13 356.3 495" style="width: 100%; height: auto; display: block;">
-                        <defs>
-                            <style>
-                                .placement-rect { stroke: #231f20; stroke-width: 0.5px; fill: none; }
-                                .placement-axis { stroke: red; stroke-width: 0.5px; fill: none; }
-                            </style>
-                            <g id="mono-path-mono7-v">
-                                <path d="M217.5,120.49h-27.97L138.39,0h-19.95L0,279.02h19.33l32.02-75.42h77.07v186.4h18.44v-110.98h70.64c58.21,0,95.82-31.12,95.82-79.27s-37.61-79.27-95.82-79.27ZM58.09,187.71L128.41,22.04l41.79,98.45h-41.79v67.22H58.09ZM146.85,263.13v-126.76h30.09l53.57,126.21c-3.53.35-7.16.55-10.91.55h-72.76ZM248.35,259.07l-52.08-122.69h23.34c44.51,0,74.42,25.47,74.42,63.38,0,29-17.52,50.71-45.68,59.31Z"/>
-                            </g>
-                        </defs>
-                        <rect class="placement-rect" x="15" y="10" width="326.3" height="449.2"/>
-                        <line class="placement-axis" x1="178.15" y1="476.2" x2="178.15" y2="-7"/>
-                        <line class="placement-axis" x1="2.2" y1="234.6" x2="354.1" y2="234.6"/>
-                        <use href="#mono-path-mono7-v" fill="#000000" transform="translate(147.87, 191.7) scale(0.22)" />
-                    </svg>
-                    <div class="placement-label-desc">Vertical Format (Centered)</div>
-                </div>
-                <div class="placement-item">
-                    <svg viewBox="0 -21 479.2 388" style="width: 100%; height: auto; display: block;">
-                        <defs>
-                            <style>
-                                .placement-rect { stroke: #231f20; stroke-width: 0.5px; fill: none; }
-                                .placement-axis { stroke: red; stroke-width: 0.5px; fill: none; }
-                            </style>
-                            <g id="mono-path-mono7-h">
-                                <path d="M217.5,120.49h-27.97L138.39,0h-19.95L0,279.02h19.33l32.02-75.42h77.07v186.4h18.44v-110.98h70.64c58.21,0,95.82-31.12,95.82-79.27s-37.61-79.27-95.82-79.27ZM58.09,187.71L128.41,22.04l41.79,98.45h-41.79v67.22H58.09ZM146.85,263.13v-126.76h30.09l53.57,126.21c-3.53.35-7.16.55-10.91.55h-72.76ZM248.35,259.07l-52.08-122.69h23.34c44.51,0,74.42,25.47,74.42,63.38,0,29-17.52,50.71-45.68,59.31Z"/>
-                            </g>
-                        </defs>
-                        <rect class="placement-rect" x="15" y="10" width="449.2" height="326.3"/>
-                        <line class="placement-axis" x1="239.6" y1="360.7" x2="239.6" y2="-14.5"/>
-                        <line class="placement-axis" x1="5.9" y1="173.1" x2="473.2" y2="173.1"/>
-                        <use href="#mono-path-mono7-h" fill="#000000" transform="translate(209.32, 130.25) scale(0.22)" />
-                    </svg>
-                    <div class="placement-label-desc">Horizontal Format (Centered)</div>
-                </div>
-                <div class="placement-item">
-                    <svg viewBox="0 -21 410.2 437.5" style="width: 100%; height: auto; display: block;">
-                        <defs>
-                            <style>
-                                .placement-rect { stroke: #231f20; stroke-width: 0.5px; fill: none; }
-                                .placement-axis { stroke: red; stroke-width: 0.5px; fill: none; }
-                            </style>
-                            <g id="mono-path-mono7-s">
-                                <path d="M217.5,120.49h-27.97L138.39,0h-19.95L0,279.02h19.33l32.02-75.42h77.07v186.4h18.44v-110.98h70.64c58.21,0,95.82-31.12,95.82-79.27s-37.61-79.27-95.82-79.27ZM58.09,187.71L128.41,22.04l41.79,98.45h-41.79v67.22H58.09ZM146.85,263.13v-126.76h30.09l53.57,126.21c-3.53.35-7.16.55-10.91.55h-72.76ZM248.35,259.07l-52.08-122.69h23.34c44.51,0,74.42,25.47,74.42,63.38,0,29-17.52,50.71-45.68,59.31Z"/>
-                            </g>
-                        </defs>
-                        <rect class="placement-rect" x="15" y="10" width="380.2" height="380.2"/>
-                        <line class="placement-axis" x1="205.1" y1="414.4" x2="205.1" y2="-14.3"/>
-                        <line class="placement-axis" x1="5.1" y1="200" x2="405.1" y2="200"/>
-                        <use href="#mono-path-mono7-s" fill="#000000" transform="translate(174.82, 157.2) scale(0.22)" />
-                    </svg>
-                    <div class="placement-label-desc">Square Format (Centered)</div>
-                </div>
-            </div>
-        `;
-    } else if (block.id === 'block_mono_8') {
-        visualContent = `
-            <div class="placements-grid">
-                <div class="placement-item">
-                    <svg viewBox="0 -13 356.3 495" style="width: 100%; height: auto; display: block;">
-                        <defs>
-                            <style>
-                                .placement-rect { stroke: #231f20; stroke-width: 0.5px; fill: none; }
-                                .placement-axis { stroke: red; stroke-width: 0.5px; fill: none; }
-                            </style>
-                            <g id="mono-path-mono8-v">
-                                <path d="M217.5,120.49h-27.97L138.39,0h-19.95L0,279.02h19.33l32.02-75.42h77.07v186.4h18.44v-110.98h70.64c58.21,0,95.82-31.12,95.82-79.27s-37.61-79.27-95.82-79.27ZM58.09,187.71L128.41,22.04l41.79,98.45h-41.79v67.22H58.09ZM146.85,263.13v-126.76h30.09l53.57,126.21c-3.53.35-7.16.55-10.91.55h-72.76ZM248.35,259.07l-52.08-122.69h23.34c44.51,0,74.42,25.47,74.42,63.38,0,29-17.52,50.71-45.68,59.31Z"/>
-                            </g>
-                        </defs>
-                        <rect class="placement-rect" x="15" y="10" width="326.3" height="449.2"/>
-                        <line class="placement-axis" x1="178.15" y1="476.2" x2="178.15" y2="-7"/>
-                        <use href="#mono-path-mono8-v" fill="#000000" transform="translate(147.87, 58.9) scale(0.22)" />
-                    </svg>
-                    <div class="placement-label-desc">Vertical Format (Centered, Top Aligned)</div>
-                </div>
-                <div class="placement-item">
-                    <svg viewBox="0 -21 479.2 388" style="width: 100%; height: auto; display: block;">
-                        <defs>
-                            <style>
-                                .placement-rect { stroke: #231f20; stroke-width: 0.5px; fill: none; }
-                                .placement-axis { stroke: red; stroke-width: 0.5px; fill: none; }
-                            </style>
-                            <g id="mono-path-mono8-h">
-                                <path d="M217.5,120.49h-27.97L138.39,0h-19.95L0,279.02h19.33l32.02-75.42h77.07v186.4h18.44v-110.98h70.64c58.21,0,95.82-31.12,95.82-79.27s-37.61-79.27-95.82-79.27ZM58.09,187.71L128.41,22.04l41.79,98.45h-41.79v67.22H58.09ZM146.85,263.13v-126.76h30.09l53.57,126.21c-3.53.35-7.16.55-10.91.55h-72.76ZM248.35,259.07l-52.08-122.69h23.34c44.51,0,74.42,25.47,74.42,63.38,0,29-17.52,50.71-45.68,59.31Z"/>
-                            </g>
-                        </defs>
-                        <rect class="placement-rect" x="15" y="10" width="449.2" height="326.3"/>
-                        <line class="placement-axis" x1="239.6" y1="360.7" x2="239.6" y2="-14.5"/>
-                        <use href="#mono-path-mono8-h" fill="#000000" transform="translate(209.32, 57.3) scale(0.22)" />
-                    </svg>
-                    <div class="placement-label-desc">Horizontal Format (Centered, Top Aligned)</div>
-                </div>
-                <div class="placement-item">
-                    <svg viewBox="0 -21 410.2 437.5" style="width: 100%; height: auto; display: block;">
-                        <defs>
-                            <style>
-                                .placement-rect { stroke: #231f20; stroke-width: 0.5px; fill: none; }
-                                .placement-axis { stroke: red; stroke-width: 0.5px; fill: none; }
-                            </style>
-                            <g id="mono-path-mono8-s">
-                                <path d="M217.5,120.49h-27.97L138.39,0h-19.95L0,279.02h19.33l32.02-75.42h77.07v186.4h18.44v-110.98h70.64c58.21,0,95.82-31.12,95.82-79.27s-37.61-79.27-95.82-79.27ZM58.09,187.71L128.41,22.04l41.79,98.45h-41.79v67.22H58.09ZM146.85,263.13v-126.76h30.09l53.57,126.21c-3.53.35-7.16.55-10.91.55h-72.76ZM248.35,259.07l-52.08-122.69h23.34c44.51,0,74.42,25.47,74.42,63.38,0,29-17.52,50.71-45.68,59.31Z"/>
-                            </g>
-                        </defs>
-                        <rect class="placement-rect" x="15" y="10" width="380.2" height="380.2"/>
-                        <line class="placement-axis" x1="205.1" y1="414.4" x2="205.1" y2="-14.3"/>
-                        <use href="#mono-path-mono8-s" fill="#000000" transform="translate(174.82, 57.9) scale(0.22)" />
-                    </svg>
-                    <div class="placement-label-desc">Square Format (Centered, Top Aligned)</div>
-                </div>
-            </div>
-        `;
     } else if (block.id === 'block_mono_9') {
         const monoPaths = '<path d="M217.5,120.49h-27.97L138.39,0h-19.95L0,279.02h19.33l32.02-75.42h77.07v186.4h18.44v-110.98h70.64c58.21,0,95.82-31.12,95.82-79.27s-37.61-79.27-95.82-79.27ZM58.09,187.71L128.41,22.04l41.79,98.45h-41.79v67.22H58.09ZM146.85,263.13v-126.76h30.09l53.57,126.21c-3.53.35-7.16.55-10.91.55h-72.76ZM248.35,259.07l-52.08-122.69h23.34c44.51,0,74.42,25.47,74.42,63.38,0,29-17.52,50.71-45.68,59.31Z"/>';
 
         const incorrectItems = [
             {
                 title_ko: "방향을 변경하는 경우",
+                title_en: "Altering the orientation",
                 svg: '<svg viewBox="0 0 240 144" style="width: 100%; height: auto; display: block;"><rect width="240" height="144" fill="#ffffff" /><g fill="#02060f" transform="translate(160, 25) rotate(90) scale(0.24)">' + monoPaths + '</g><line x1="0" y1="144" x2="240" y2="0" stroke="#ff0004" stroke-width="1.2" /></svg>'
             },
             {
                 title_ko: "비율을 임의로 조정하는 경우",
+                title_en: "Distorting the proportions",
                 svg: '<svg viewBox="0 0 240 144" style="width: 100%; height: auto; display: block;"><rect width="240" height="144" fill="#ffffff" /><g fill="#02060f" transform="translate(73, 45) scale(0.3, 0.14)">' + monoPaths + '</g><line x1="0" y1="144" x2="240" y2="0" stroke="#ff0004" stroke-width="1.2" /></svg>'
             },
             {
                 title_ko: "기울기를 적용하는 경우",
+                title_en: "Applying a slant or skew",
                 svg: '<svg viewBox="0 0 240 144" style="width: 100%; height: auto; display: block;"><rect width="240" height="144" fill="#ffffff" /><g fill="#02060f" transform="translate(90, 42) rotate(-14) skewX(-15) scale(0.22)">' + monoPaths + '</g><line x1="0" y1="144" x2="240" y2="0" stroke="#ff0004" stroke-width="1.2" /></svg>'
             },
             {
-                title_ko: "요소의 크기나 형태, 위치, 굵기를 변형하는 경우",
+                title_ko: "요소의 크기나 형태, 굵기를 변형하는 경우",
+                title_en: "Modifying the elements size or weight",
                 svg: '<svg viewBox="0 0 240 144" style="width: 100%; height: auto; display: block;"><rect width="240" height="144" fill="#ffffff" /><g fill="#02060f" transform="translate(-2, -245) scale(0.6)"><path d="M227.5,486.5h-17.3l-13.1-31.2h-7.1l-51.3,121.8h7.4l18.8-45h25.9v60.9h11.4v-28.7h24.5c28.9,0,47.6-15.3,47.6-38.9s-18.4-38.9-46.8-38.9h0ZM241.1,552.4l-1.4.4c-.5,0-1.1.2-1.6.3l-19.6-46.6-2.6-6.2h0l-1.5-3.5h14c20.3,0,33.9,11.5,33.9,28.7s-8,23.1-21.3,27h.1ZM202.2,532.1h19.1l9.1,22h-28.2v-22h0ZM208,500.3h0l2.6,6.2h0l8.1,19.4h-16.5v-29.1h4.4l1.5,3.5h-.1ZM167.4,525.9l25.7-61.6,9.3,22.3h-11.5v39.4h-23.5Z"/></g><line x1="0" y1="144" x2="240" y2="0" stroke="#ff0004" stroke-width="1.2" /></svg>'
             },
             {
                 title_ko: "임의의 폰트를 활용하여 다른 형태로 만드는 경우",
+                title_en: "Recreating with an arbitrary font",
                 svg: '<svg viewBox="0 0 240 144" style="width: 100%; height: auto; display: block;"><rect width="240" height="144" fill="#ffffff" /><text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" font-family="Georgia, serif" font-size="60px" font-weight="700" letter-spacing="-5px" fill="#02060f">AP</text><line x1="0" y1="144" x2="240" y2="0" stroke="#ff0004" stroke-width="1.2" /></svg>'
             },
             {
                 title_ko: "대비가 낮은 컬러나 이미지와 조합하여 가시성이 낮은경우",
+                title_en: "Low visibility due to low-contrast backgrounds",
                 svg: '<svg viewBox="0 0 240 144" style="width: 100%; height: auto; display: block;"><defs><pattern id="mono-inc-busy-pattern" width="12" height="12" patternUnits="userSpaceOnUse"><rect width="12" height="12" fill="#202630" /><path d="M 12 0 L 0 12 M 0 0 L 12 12" stroke="#35383f" stroke-width="1.5" /></pattern></defs><rect width="240" height="144" fill="url(#mono-inc-busy-pattern)" /><g fill="#02060f" transform="translate(85.5, 29.1) scale(0.22)">' + monoPaths + '</g><line x1="0" y1="144" x2="240" y2="0" stroke="#ff0004" stroke-width="1.2" /></svg>'
             }
         ];
 
         let gridHtml = '';
         incorrectItems.forEach(item => {
+            const label = currentLang === 'en' ? item.title_en : item.title_ko;
             gridHtml += `
                 <div class="incorrect-item">
                     <div class="incorrect-preview">
                         ${item.svg}
                         <div class="incorrect-warning-badge">✕</div>
-                        <div class="incorrect-label">${item.title_ko}</div>
+                        <div class="incorrect-label">${label}</div>
                     </div>
                 </div>
             `;
@@ -2040,7 +1885,7 @@ function renderBlockHTML(block, sectionId, index, totalBlocks) {
                 ${gridHtml}
             </div>
         `;
-    } else if (block.id === 'block_slog_1' || block.id === 'block_slog_2' || block.id === 'block_slog_3' || block.id === 'block_slog_4') {
+    } else if (block.id === 'block_slog_1' || block.id === 'block_slog_2' || block.id === 'block_slog_3') {
         const sloganMasterDefs = `
             <g id="slogan-master-paths">
                 <path d="M37.44,44.08H14.64l-5.84,12.88H0L26.56.48l25.28,56.48h-8.8l-5.6-12.88ZM34.16,36.4l-7.92-18.08-8.24,18.08h16.16Z" fill="#02060f"/>
@@ -2164,66 +2009,13 @@ function renderBlockHTML(block, sectionId, index, totalBlocks) {
                     </svg>
                 </div>
             `;
-        } else {
-            visualContent = `
-                <div class="visual-image-frame visual-image-svg-box" style="padding: 24px 0; background-color: #ffffff;">
-                    <svg viewBox="0 0 935 426.15" style="width: 100%; height: auto; display: block; max-width: 810px; margin: 0 auto;">
-                        <defs>
-                            ${sloganMasterDefs}
-                            <g id="monogram-master-path">
-                                <path d="M217.5,120.49h-27.97L138.39,0h-19.95L0,279.02h19.33l32.02-75.42h77.07v186.4h18.44v-110.98h70.64c58.21,0,95.82-31.12,95.82-79.27s-37.61-79.27-95.82-79.27ZM58.09,187.71L128.41,22.04l41.79,98.45h-41.79v67.22H58.09ZM146.85,263.13v-126.76h30.09l53.57,126.21c-3.53.35-7.16.55-10.91.55h-72.76ZM248.35,259.07l-52.08-122.69h23.34c44.51,0,74.42,25.47,74.42,63.38,0,29-17.52,50.71-45.68,59.31Z"/>
-                            </g>
-                        </defs>
-                        <!-- Center vertical line -->
-                        <line x1="492.03" y1="0" x2="492.03" y2="390.52" stroke="#000000" stroke-dasharray="6 6" stroke-width="0.5px" fill="none" opacity="0.3" />
-                        
-                        <!-- Horizontal guidelines -->
-                        <line x1="136.87" y1="235.59" x2="843.21" y2="235.59" stroke="#02060f" stroke-width="0.5px" fill="none" opacity="0.3" />
-                        <line x1="136.87" y1="174.63" x2="843.21" y2="174.63" stroke="#02060f" stroke-width="0.5px" fill="none" opacity="0.3" />
-                        <line x1="136.87" y1="60.71" x2="843.21" y2="60.71" stroke="#02060f" stroke-width="0.5px" fill="none" opacity="0.3" />
-                        <line x1="136.87" y1="288.55" x2="843.21" y2="288.55" stroke="#02060f" stroke-width="0.5px" fill="none" opacity="0.3" />
-                        <line x1="136.87" y1="315.59" x2="843.21" y2="315.59" stroke="#02060f" stroke-width="0.5px" fill="none" opacity="0.3" />
-                        <line x1="136.87" y1="342.63" x2="843.21" y2="342.63" stroke="#02060f" stroke-width="0.5px" fill="none" opacity="0.3" />
-                        
-                        <!-- Left brackets -->
-                        <polyline points="98.35 60.71 62.98 60.71 62.98 174.63 98.35 174.63" stroke="#ed1c24" stroke-width="0.8px" fill="none" />
-                        <polyline points="98.35 174.63 62.98 174.63 62.98 235.59 98.35 235.59" stroke="#ed1c24" stroke-width="0.8px" fill="none" />
-                        <polyline points="98.35 235.59 62.98 235.59 62.98 288.55 98.35 288.55" stroke="#ed1c24" stroke-width="0.8px" fill="none" />
-                        <polyline points="98.35 288.75 62.98 288.75 62.98 315.59 98.35 315.59" stroke="#ed1c24" stroke-width="0.8px" fill="none" />
-                        <polyline points="98.35 316.26 62.98 316.26 62.98 342.55 98.35 342.55" stroke="#ed1c24" stroke-width="0.8px" fill="none" />
-                        
-                        <!-- Selectable labels -->
-                        <text x="36" y="125" fill="#ed1c24" font-family="var(--font-en)" font-size="16px" font-weight="500">2x</text>
-                        <text x="43" y="210" fill="#ed1c24" font-family="var(--font-en)" font-size="16px" font-weight="500">x</text>
-                        <text x="43" y="267" fill="#ed1c24" font-family="var(--font-en)" font-size="16px" font-weight="500">x</text>
-                        <text x="32" y="307" fill="#ed1c24" font-family="var(--font-en)" font-size="14px" font-weight="500">0.5x</text>
-                        <text x="32" y="334" fill="#ed1c24" font-family="var(--font-en)" font-size="14px" font-weight="500">0.5x</text>
-                        
-                        <!-- Right text labels -->
-                        <text x="854.69" y="260" fill="#ed1c24" font-family="var(--font-en)" font-size="12.5px" font-weight="500" letter-spacing="0.5px">FUTURA PT</text>
-                        <text x="854.69" y="274" fill="#ed1c24" font-family="var(--font-en)" font-size="12.5px" font-weight="500" letter-spacing="0.5px">Medium</text>
-                        
-                        <text x="854.69" y="326" fill="#ed1c24" font-family="var(--font-en)" font-size="12.5px" font-weight="500" letter-spacing="0.5px">FUTURA PT</text>
-                        <text x="854.69" y="340" fill="#ed1c24" font-family="var(--font-en)" font-size="12.5px" font-weight="500" letter-spacing="0.5px">Book</text>
-                        
-                        <!-- Bottom label -->
-                        <text x="492" y="420" fill="#ed1c24" font-family="var(--font-en)" font-size="13px" font-weight="500" text-anchor="middle" letter-spacing="0.5px">Tracking: -10</text>
-                        
-                        <!-- Monogram -->
-                        <use href="#monogram-master-path" transform="translate(448.97, 60.71) scale(0.2928)" fill="#231f20" />
-                        
-                        <!-- Slogan -->
-                        <use href="#slogan-master-paths" x="167.1" y="231.59" />
-                    </svg>
-                </div>
-            `;
         }
     } else {
         const isOtherSvg = adaptedImage.endsWith('.svg') && !adaptedImage.includes('core_wordmark');
         const frameClass = isOtherSvg ? 'visual-image-frame visual-image-svg-box' : 'visual-image-frame';
         visualContent = `
             <div class="${frameClass}">
-                <img src="${adaptedImage}" alt="${block.title || 'AP BEAUTY'}" loading="lazy" style="width: 100%; height: auto; display: block;">
+                <img src="${adaptedImage}" alt="${blockTitle || 'AP BEAUTY'}" loading="lazy" style="width: 100%; height: auto; display: block;">
             </div>
         `;
     }
@@ -2233,8 +2025,8 @@ function renderBlockHTML(block, sectionId, index, totalBlocks) {
         return `
             <div class="guide-block" id="block-${block.id}" style="display: block !important; padding: 40px 0 !important;">
                 <div class="block-text-column" style="width: 100% !important; margin-bottom: 24px !important;">
-                    <h2 class="block-title">${block.title}</h2>
-                    <div class="text-block-content">${formatContent(block.content)}</div>
+                    <h2 class="block-title">${blockTitle}</h2>
+                    <div class="text-block-content">${formatContent(blockContent)}</div>
                 </div>
                 
                 <div class="block-visual-column" style="width: 100% !important;">
@@ -2254,8 +2046,8 @@ function renderBlockHTML(block, sectionId, index, totalBlocks) {
     return `
         <div class="guide-block" id="block-${block.id}">
             <div class="block-text-column">
-                <h2 class="block-title">${block.title}</h2>
-                <div class="text-block-content">${formatContent(block.content)}</div>
+                <h2 class="block-title">${blockTitle}</h2>
+                <div class="text-block-content">${formatContent(blockContent)}</div>
             </div>
             
             <div class="block-visual-column">
@@ -2267,9 +2059,7 @@ function renderBlockHTML(block, sectionId, index, totalBlocks) {
 
 // Clipboard copy utility
 function copyText(text) {
-    const langBtn = document.getElementById('lang-toggle-btn');
-    const isEnglish = langBtn && langBtn.textContent.trim() === 'KR';
-    const message = isEnglish ? `Copied: ${text}` : `복사 완료: ${text}`;
+    const message = currentLang === 'en' ? `Copied: ${text}` : `복사 완료: ${text}`;
     navigator.clipboard.writeText(text).then(() => {
         showToast(message);
     }).catch(err => {
@@ -2296,6 +2086,29 @@ function showToast(message, isError = false) {
         toast.style.transform = 'translateY(20px)';
         setTimeout(() => toast.remove(), 500);
     }, 3000);
+}
+
+// Helper for cross-lingual bilingual search
+function checkMatch(text, query) {
+    if (!text || !query) return false;
+    const lowerText = text.toLowerCase();
+    const lowerQuery = query.toLowerCase();
+    const synonyms = [
+        ['monogram', '모노그램'],
+        ['wordmark', '워드마크']
+    ];
+    
+    for (const pair of synonyms) {
+        if (lowerQuery.includes(pair[0]) || lowerQuery.includes(pair[1])) {
+            const termInQuery = lowerQuery.includes(pair[0]) ? pair[0] : pair[1];
+            const altTerm = lowerQuery.includes(pair[0]) ? pair[1] : pair[0];
+            const altQuery = lowerQuery.replace(termInQuery, altTerm);
+            if (lowerText.includes(lowerQuery) || lowerText.includes(altQuery)) {
+                return true;
+            }
+        }
+    }
+    return lowerText.includes(lowerQuery);
 }
 
 // Client-Side Search Engine
@@ -2349,8 +2162,8 @@ function handleSearch(query) {
     let totalMatches = 0;
     
     sections.forEach(sec => {
-        const sectionTitle = sec.querySelector('.section-title').textContent.toLowerCase();
-        const sectionMatchesTitle = sectionTitle.includes(query);
+        const sectionTitle = sec.querySelector('.section-title').textContent;
+        const sectionMatchesTitle = checkMatch(sectionTitle, query);
         
         let sectionMatchesCount = 0;
         const blocks = sec.querySelectorAll('.guide-block');
@@ -2359,11 +2172,11 @@ function handleSearch(query) {
             const blockTitleEl = blk.querySelector('.block-title');
             const blockContentEl = blk.querySelector('.text-block-content');
             
-            const titleText = blockTitleEl ? blockTitleEl.textContent.toLowerCase() : '';
-            const contentText = blockContentEl ? blockContentEl.textContent.toLowerCase() : '';
+            const titleText = blockTitleEl ? blockTitleEl.textContent : '';
+            const contentText = blockContentEl ? blockContentEl.textContent : '';
             
-            const titleMatches = titleText.includes(query);
-            const contentMatches = contentText.includes(query);
+            const titleMatches = checkMatch(titleText, query);
+            const contentMatches = checkMatch(contentText, query);
             
             if (titleMatches || contentMatches || sectionMatchesTitle) {
                 blk.style.display = ''; // Show block
@@ -2400,19 +2213,19 @@ function handleSearch(query) {
     // Filter Navigation Links
     navLinks.forEach(link => {
         const targetId = link.getAttribute('href').replace('#', '');
-        const text = link.textContent.toLowerCase();
+        const text = link.textContent;
         const submenu = document.getElementById(`submenu-${targetId}`);
         
         let hasSubmenuMatch = false;
         if (submenu) {
             const subLinks = submenu.querySelectorAll('.nav-sub-link');
             subLinks.forEach(sl => {
-                const subText = sl.textContent.toLowerCase();
+                const subText = sl.textContent;
                 const blockId = sl.getAttribute('href').replace('#block-', '');
                 const blockEl = document.getElementById(`block-${blockId}`);
                 const isBlockVisible = blockEl && blockEl.style.display !== 'none';
                 
-                const subMatch = subText.includes(query) || isBlockVisible;
+                const subMatch = checkMatch(subText, query) || isBlockVisible;
                 if (subMatch) {
                     sl.style.display = 'block';
                     hasSubmenuMatch = true;
@@ -2425,11 +2238,12 @@ function handleSearch(query) {
         // Keep the main link always visible during search
         link.style.display = 'block';
         
-        if (hasSubmenuMatch || text.includes(query)) {
+        const mainMatch = checkMatch(text, query);
+        if (hasSubmenuMatch || mainMatch) {
             if (submenu) {
                 submenu.classList.add('expanded');
                 // If main link matched, show all sublinks of this section
-                if (text.includes(query)) {
+                if (mainMatch) {
                     const subLinks = submenu.querySelectorAll('.nav-sub-link');
                     subLinks.forEach(sl => sl.style.display = 'block');
                 }
@@ -2453,10 +2267,12 @@ function handleSearch(query) {
             emptyMsg.style.fontFamily = 'var(--font-en)';
             emptyMsg.style.fontSize = '1.2rem';
             emptyMsg.style.letterSpacing = '1px';
+            const msg = currentLang === 'en' ? `No results found for "<strong>${escapeHTML(query)}</strong>".` : `"${escapeHTML(query)}"에 대한 검색 결과가 없습니다.`;
+            const sub = currentLang === 'en' ? 'Try searching with different keywords.' : '다른 키워드로 검색해 보세요.';
             emptyMsg.innerHTML = `
                 <div style="font-size: 2rem; margin-bottom: 16px;">🔍</div>
-                "<strong>${escapeHTML(query)}</strong>"에 대한 검색 결과가 없습니다.<br>
-                <small style="font-size: 0.9rem; margin-top: 8px; display: inline-block;">다른 키워드로 검색해 보세요.</small>
+                ${msg}<br>
+                <small style="font-size: 0.9rem; margin-top: 8px; display: inline-block;">${sub}</small>
             `;
             const sectionsWrapper = document.getElementById('sections-wrapper');
             if (sectionsWrapper) sectionsWrapper.appendChild(emptyMsg);
@@ -2478,7 +2294,24 @@ function highlightText(el, query) {
     // Restore first to start clean on next type
     el.innerHTML = el.getAttribute('data-original-html');
     
-    const regex = new RegExp(`(${escapeRegExp(query)})`, 'gi');
+    const lowerQuery = query.toLowerCase();
+    const synonyms = [
+        ['monogram', '모노그램'],
+        ['wordmark', '워드마크']
+    ];
+    
+    let regexPattern = escapeRegExp(query);
+    for (const pair of synonyms) {
+        if (lowerQuery.includes(pair[0]) || lowerQuery.includes(pair[1])) {
+            const termInQuery = lowerQuery.includes(pair[0]) ? pair[0] : pair[1];
+            const altTerm = lowerQuery.includes(pair[0]) ? pair[1] : pair[0];
+            const queryPattern = lowerQuery.replace(termInQuery, `(?:${escapeRegExp(termInQuery)}|${escapeRegExp(altTerm)})`);
+            regexPattern = queryPattern;
+            break;
+        }
+    }
+    
+    const regex = new RegExp(`(${regexPattern})`, 'gi');
     const walk = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, null, false);
     let node;
     const textNodes = [];
@@ -2491,7 +2324,10 @@ function highlightText(el, query) {
         if (!parent || parent.tagName === 'MARK' || parent.classList.contains('hex-copy-badge')) return;
         
         const content = textNode.nodeValue;
-        if (content.toLowerCase().includes(query)) {
+        if (regex.test(content)) {
+            // Reset regex lastIndex because test() moves it
+            regex.lastIndex = 0;
+            
             const fragment = document.createDocumentFragment();
             let lastIndex = 0;
             content.replace(regex, (match, p1, offset) => {

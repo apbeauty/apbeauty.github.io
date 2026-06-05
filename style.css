@@ -172,7 +172,7 @@ body {
 .main-content {
     flex: 1;
     margin-left: var(--sidebar-width);
-    padding: 40px 40px 80px 40px;
+    padding: 116px 40px 20px 40px;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -186,19 +186,28 @@ body {
     display: none;
 }
 
-/* Page Big Header Title */
 .main-page-title-container {
-    margin-top: -2px; /* Align container top exactly with left brand logo top (38px) */
-    height: 24.3px; /* Matches visual height of left logo */
+    position: fixed;
+    top: 0;
+    left: calc(max(0px, (100vw - 1720px) / 2) + var(--sidebar-width));
+    right: calc(max(0px, (100vw - 1720px) / 2));
+    z-index: 100;
+    background-color: var(--ap-bg-darker);
+    margin-top: 0;
+    padding-top: 38px; /* Perfectly aligned with logo's top edge (36px padding + 2px margin) */
+    padding-bottom: 24px; /* Space below title */
+    padding-left: 32px; /* Shifted slightly to the left (by 8px) to align with body text under scrollbar shift */
+    padding-right: 40px;
+    margin-bottom: 0;
+    height: 26px; /* Matches exact height of left logo */
     display: flex;
     align-items: center;
-    margin-bottom: 50px;
     box-sizing: content-box;
 }
 
 .main-page-title {
     font-family: var(--font-en);
-    font-size: 35px; /* Use exact px to match logo visual scale on all viewports */
+    font-size: 38px; /* Use exact px to match logo visual scale on all viewports */
     font-weight: 400;
     color: var(--ap-white);
     letter-spacing: 5px;
@@ -206,7 +215,7 @@ body {
     text-transform: uppercase;
     margin: 0;
     position: relative;
-    top: 3.5px; /* Compensate for font baseline offset to align top and bottom with logo */
+    top: -0.5px; /* Compensate for font baseline offset to align top and bottom with logo */
 }
 
 .menu-toggle {
@@ -297,14 +306,20 @@ body {
 
 .section-desc {
     color: var(--ap-gray);
-    font-size: 1.26rem; /* 120% of 1.05rem */
+    font-size: 1.26rem; /* Original size for Korean page */
     line-height: 1.6;
     max-width: 800px;
-    margin-bottom: 57.6px;
+    margin-bottom: 74.88px;
     border-left: 2px solid var(--ap-border);
     padding-left: 16px;
     word-break: keep-all;
     overflow-wrap: break-word;
+}
+
+/* English Version overrides */
+.lang-en .section-desc {
+    font-family: var(--font-en);
+    font-size: 1.44rem; /* Increased size for English page */
 }
 
 /* 2-Column Editorial Guide Block (Discord-inspired, no rounded boxes) */
@@ -313,12 +328,12 @@ body {
     display: grid;
     grid-template-columns: 3fr 7fr;
     gap: 72px;
-    padding: 54px 0;
+    padding: 70.2px 0;
     transition: var(--transition-smooth);
 }
 
 .guide-block:first-of-type {
-    padding-top: 12px; /* Reduced by 50% to decrease distance to section header */
+    padding-top: 15.6px; /* Increased by 130% to match overall spacing increase */
 }
 
 .guide-block:last-of-type {
@@ -345,7 +360,7 @@ body {
 }
 
 .text-block-content {
-    font-size: 1.08rem; /* 120% of 0.9rem */
+    font-size: 1.08rem; /* Original size for Korean page */
     color: var(--ap-silver);
     line-height: 1.6;
     word-break: keep-all;
@@ -361,6 +376,16 @@ body {
 
 .content-paragraph:last-child {
     margin-bottom: 0;
+}
+
+/* English Version overrides */
+.lang-en .text-block-content {
+    font-family: var(--font-en);
+    font-size: 1.24rem; /* Increased size for English page */
+}
+
+.lang-en .content-paragraph {
+    font-family: var(--font-en);
 }
 
 /* Right Column: Visual Showcase (PDF Page Screenshot Frame) */
@@ -511,21 +536,33 @@ body {
 }
 
 .toast {
-    background-color: var(--ap-bg);
+    background-color: var(--ap-bg-darker);
     border: 1px solid var(--ap-border);
-    color: var(--ap-white);
-    padding: 16px 24px;
-    font-size: 0.85rem;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    display: flex;
+    color: var(--ap-silver);
+    height: 34px;
+    padding: 0 16px;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    display: inline-flex;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
     transform: translateX(120%);
     animation: toastIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .toast.toast-error {
     border-color: var(--ap-error);
+    color: var(--ap-error);
+}
+
+.toast span:first-child {
+    color: var(--ap-gray);
+    font-weight: 500;
+}
+
+.toast.toast-error span:first-child {
+    color: var(--ap-error);
 }
 
 @keyframes toastIn {
@@ -564,7 +601,7 @@ body.edit-mode .add-block-placeholder {
 
 @media (max-width: 1024px) {
     .main-content {
-        padding: 40px;
+        padding: 116px 40px 10px 40px;
     }
 }
 
@@ -572,7 +609,7 @@ body.edit-mode .add-block-placeholder {
     .guide-block {
         grid-template-columns: minmax(0, 1fr);
         gap: 36px;
-        padding: 48px 0;
+        padding: 62.4px 0;
     }
     
     .block-title {
@@ -615,7 +652,7 @@ body.edit-mode .add-block-placeholder {
 
     .main-content {
         margin-left: 0;
-        padding: 24px 16px !important;
+        padding: 24px 16px 6px 16px !important;
         padding-top: calc(var(--header-height) + 19px) !important;
         width: 100% !important;
         max-width: 100% !important;
@@ -672,7 +709,22 @@ body.edit-mode .add-block-placeholder {
     .mobile-logo {
         cursor: pointer;
         display: flex;
-        align-items: center;
+        align-items: baseline;
+        gap: 10px;
+    }
+    
+    .mobile-header-subtitle {
+        font-family: var(--font-en), sans-serif;
+        font-size: 15px;
+        font-weight: 400;
+        color: var(--ap-white);
+        letter-spacing: 2px;
+        line-height: 1;
+        text-transform: uppercase;
+        margin-bottom: 0;
+        white-space: nowrap;
+        position: relative;
+        bottom: 2px;
     }
     
     .mobile-actions {
@@ -860,10 +912,7 @@ body.edit-mode .add-block-placeholder {
     }
     
     .main-page-title-container {
-        margin-top: 0;
-        height: auto;
-        margin-bottom: 23px !important;
-        padding-bottom: 0;
+        display: none !important;
     }
     
     .main-page-title {
@@ -894,32 +943,37 @@ body.edit-mode .add-block-placeholder {
 
     /* 50% spacing optimization for mobile viewport */
     .guide-section {
-        margin-bottom: 40px !important;
+        margin-bottom: 52px !important;
     }
     .guide-section > div:first-of-type {
-        margin-bottom: 2px !important;
+        margin-bottom: 2.6px !important;
     }
     .guide-block:first-of-type {
-        padding-top: 6px !important;
+        padding-top: 7.8px !important;
+    }
+    .guide-block.block-full-width:first-of-type {
+        padding-top: 3.9px !important;
     }
     .block-title {
         margin-bottom: 4.8px !important;
         padding-bottom: 1.5px !important;
     }
     .guide-block {
-        padding: 29px 0 !important;
+        padding: 38.2px 0 !important;
         gap: 9px !important;
     }
     .content-paragraph {
         margin-bottom: 0.72rem !important;
     }
-    .guide-block.block-full-width,
+    .guide-block.block-full-width {
+        padding: 19.1px 0 !important;
+    }
     .guide-block[style*="padding"] {
-        padding: 24px 0 !important;
+        padding: 38.2px 0 !important;
     }
     .block-header-full-width,
     .block-text-column[style*="margin-bottom"] {
-        margin-bottom: 12px !important;
+        margin-bottom: 6px !important;
     }
     .brand-colors-showcase {
         gap: 12px !important;
@@ -960,38 +1014,8 @@ body.edit-mode .add-block-placeholder {
         gap: 8px !important;
     }
 
-    /* Monogram Exclusion Zone SVG occupies 153% width on mobile with centering & padding removal */
-    #block-block_mono_3 {
-        padding-top: 0 !important;
-        padding-bottom: 0 !important;
-        gap: 0 !important;
-    }
-    #block-block_mono_3 .block-text-column {
-        margin-bottom: 0 !important;
-    }
-    #block-block_mono_3 .content-paragraph:last-child {
-        margin-bottom: 0 !important;
-    }
-    #block-block_mono_3 .block-visual-column {
-        margin: 0 !important;
-        padding: 0 !important;
-    }
-    #block-block_mono_3 .visual-image-svg-box {
-        width: 153% !important;
-        max-width: 153% !important;
-        margin: 0 auto !important;
-        aspect-ratio: 1.20 !important;
-        position: relative !important;
-        left: 50% !important;
-        transform: translateX(-50%) !important;
-    }
-    #block-block_mono_3 .visual-image-svg-box img {
-        width: 100% !important;
-        height: 100% !important;
-        top: 0 !important;
-        left: 0 !important;
-        transform: none !important;
-    }
+
+
 
     /* Prevent iOS auto-zoom on input elements by forcing at least 16px font size */
     input, select, textarea, .header-search-input, .search-bar-input {
@@ -1013,23 +1037,7 @@ body.edit-mode .add-block-placeholder {
         display: none !important;
     }
 
-    /* Wordmark System/Exclusion Zone vertical margin removal on mobile */
-    #block-block_wm_2 {
-        padding-top: 0 !important;
-        padding-bottom: 0 !important;
-        gap: 0 !important;
-    }
-    #block-block_wm_2 .block-text-column {
-        margin-bottom: 0 !important;
-    }
-    #block-block_wm_2 .block-visual-column {
-        margin: 0 !important;
-        padding: 0 !important;
-    }
-    #block-block_wm_2 .visual-image-svg-box {
-        margin: 0 !important;
-        padding: 0 !important;
-    }
+
 
     /* CORE WORDMARK and CORE MONOGRAM occupies larger width on mobile with centering */
     #block-block_wm_1 .visual-image-frame img {
@@ -1046,36 +1054,7 @@ body.edit-mode .add-block-placeholder {
         translate: 6.07% 0 !important;
     }
 
-    /* Monogram System vertical margin and padding adjustments on mobile */
-    #block-block_mono_2 {
-        padding-top: 0 !important;
-        padding-bottom: 0 !important;
-        gap: 0 !important;
-    }
-    #block-block_mono_2 .block-text-column {
-        margin-bottom: 0 !important;
-    }
-    #block-block_mono_2 .content-paragraph:last-child {
-        margin-bottom: 0 !important;
-    }
-    #block-block_mono_2 .block-visual-column {
-        margin: 0 !important;
-        padding: 0 !important;
-    }
-    #block-block_mono_2 .visual-image-svg-box {
-        width: 70% !important;
-        margin: 0 auto !important;
-        aspect-ratio: auto !important;
-        height: auto !important;
-        padding: 0 !important;
-    }
-    #block-block_mono_2 .visual-image-svg-box img {
-        position: relative !important;
-        width: 100% !important;
-        height: auto !important;
-        top: 0 !important;
-        left: 0 !important;
-    }
+
 }
 
 /* Hex badge highlights in text blocks */
@@ -1578,10 +1557,6 @@ body.edit-mode .add-block-placeholder {
 
 #block-block_wm_4 .visual-image-svg-box,
 #block-block_mono_5 .visual-image-svg-box,
-#block-block_wm_5 .visual-image-svg-box,
-#block-block_wm_6 .visual-image-svg-box,
-#block-block_mono_7 .visual-image-svg-box,
-#block-block_mono_8 .visual-image-svg-box,
 #block-block_slog_1 .visual-image-svg-box,
 #block-block_slog_2 .visual-image-svg-box,
 #block-block_slog_3 .visual-image-svg-box,
@@ -1597,10 +1572,6 @@ body.edit-mode .add-block-placeholder {
 
 #block-block_wm_4 .visual-image-svg-box svg,
 #block-block_mono_5 .visual-image-svg-box svg,
-#block-block_wm_5 .visual-image-svg-box svg,
-#block-block_wm_6 .visual-image-svg-box svg,
-#block-block_mono_7 .visual-image-svg-box svg,
-#block-block_mono_8 .visual-image-svg-box svg,
 #block-block_slog_1 .visual-image-svg-box svg,
 #block-block_slog_2 .visual-image-svg-box svg,
 #block-block_slog_3 .visual-image-svg-box svg,
@@ -1613,10 +1584,6 @@ body.edit-mode .add-block-placeholder {
 @media (max-width: 768px) {
     #block-block_wm_4 .visual-image-svg-box,
     #block-block_mono_5 .visual-image-svg-box,
-    #block-block_wm_5 .visual-image-svg-box,
-    #block-block_wm_6 .visual-image-svg-box,
-    #block-block_mono_7 .visual-image-svg-box,
-    #block-block_mono_8 .visual-image-svg-box,
     #block-block_slog_1 .visual-image-svg-box,
     #block-block_slog_2 .visual-image-svg-box,
     #block-block_slog_3 .visual-image-svg-box,
@@ -1625,10 +1592,6 @@ body.edit-mode .add-block-placeholder {
     }
     #block-block_wm_4 .visual-image-svg-box svg,
     #block-block_mono_5 .visual-image-svg-box svg,
-    #block-block_wm_5 .visual-image-svg-box svg,
-    #block-block_wm_6 .visual-image-svg-box svg,
-    #block-block_mono_7 .visual-image-svg-box svg,
-    #block-block_mono_8 .visual-image-svg-box svg,
     #block-block_slog_1 .visual-image-svg-box svg,
     #block-block_slog_2 .visual-image-svg-box svg,
     #block-block_slog_3 .visual-image-svg-box svg,
@@ -1667,17 +1630,7 @@ body.edit-mode .add-block-placeholder {
     left: 29.2% !important; /* Centered horizontally: (100% - 41.6%) / 2 */
 }
 
-#block-block_mono_3 .visual-image-svg-box {
-    aspect-ratio: 2.0245 !important;
-}
 
-#block-block_mono_3 .visual-image-svg-box img {
-    width: auto !important;
-    height: 80% !important;
-    top: 10% !important;
-    left: 50% !important;
-    transform: translateX(-50%) !important;
-}
 
 #block-block_mono_3_2 .visual-image-svg-box {
     aspect-ratio: 4.0200 !important;
@@ -1753,11 +1706,15 @@ body.edit-mode .add-block-placeholder {
 /* APPLICATIONS Full-Width Layout */
 .guide-block.block-full-width {
     display: block !important;
-    padding: 48px 0 !important;
+    padding: 31.2px 0 !important;
+}
+
+.guide-block.block-full-width:first-of-type {
+    padding-top: 7.8px !important;
 }
 
 .block-header-full-width {
-    margin-bottom: 24px;
+    margin-bottom: 15.6px;
     width: 100%;
 }
 
@@ -2458,4 +2415,11 @@ body.edit-mode .add-block-placeholder {
     #block-block_slog_3 {
         grid-template-columns: 1fr 2fr !important;
     }
+}
+
+/* Custom override for Monogram SYSTEM, PLACEMENT GUIDE & EXCLUSION ZONE block visual column vertical alignment */
+#block-block_mono_2 .block-visual-column,
+#block-block_mono_6 .block-visual-column,
+#block-block_mono_3 .block-visual-column {
+    justify-content: flex-start !important;
 }
