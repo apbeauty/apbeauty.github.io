@@ -730,7 +730,7 @@ body.edit-mode .add-block-placeholder {
     .mobile-actions {
         display: flex;
         align-items: center;
-        gap: 5px; /* Spacing between EN button and hamburger menu (5px) */
+        gap: 7px; /* Spacing between EN button and hamburger menu (7px) */
     }
     
     .mobile-actions::before {
@@ -739,7 +739,7 @@ body.edit-mode .add-block-placeholder {
         width: 1px;
         height: 24px;
         background-color: rgba(0, 0, 0, 0.2);
-        margin-right: 3px; /* Flex gap (5px) + margin-right (3px) = 8px spacing to EN button */
+        margin-right: 3px; /* Flex gap (7px) + margin-right (3px) = 10px spacing to EN button */
         margin-left: 0px;
     }
     
