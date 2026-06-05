@@ -2096,22 +2096,72 @@ function checkMatch(text, query) {
     if (!text || !query) return false;
     const lowerText = text.toLowerCase();
     const lowerQuery = query.toLowerCase();
+    
+    // 1. Direct match check
+    if (lowerText.includes(lowerQuery)) return true;
+    
     const synonyms = [
         ['monogram', '모노그램'],
-        ['wordmark', '워드마크']
+        ['wordmark', '워드마크'],
+        ['slogan', '슬로건'],
+        ['logo', '로고'],
+        ['minimum', '최소'],
+        ['size', '크기'],
+        ['size', '사이즈'],
+        ['exclusion', '안전'],
+        ['exclusion', '여백'],
+        ['zone', '영역'],
+        ['zone', '공간'],
+        ['placement', '배치'],
+        ['placement', '정렬'],
+        ['incorrect', '오용'],
+        ['incorrect', '금지'],
+        ['incorrect', '잘못된'],
+        ['background', '배경'],
+        ['usage', '사용'],
+        ['usage', '활용'],
+        ['download', '다운로드'],
+        ['download', '다운'],
+        ['color', '색상'],
+        ['color', '컬러'],
+        ['typeface', '서체'],
+        ['typeface', '폰트'],
+        ['typeface', '글꼴'],
+        ['structure', '구조'],
+        ['grid', '그리드']
     ];
     
+    // 2. Fully translated query check (translate all matching terms)
+    let altQuery = lowerQuery;
+    let replacedAny = false;
+    
+    for (const pair of synonyms) {
+        if (altQuery.includes(pair[0])) {
+            altQuery = altQuery.replace(new RegExp(pair[0], 'g'), pair[1]);
+            replacedAny = true;
+        } else if (altQuery.includes(pair[1])) {
+            altQuery = altQuery.replace(new RegExp(pair[1], 'g'), pair[0]);
+            replacedAny = true;
+        }
+    }
+    
+    if (replacedAny && lowerText.includes(altQuery)) {
+        return true;
+    }
+    
+    // 3. Partial/Single synonym replacement fallback
     for (const pair of synonyms) {
         if (lowerQuery.includes(pair[0]) || lowerQuery.includes(pair[1])) {
             const termInQuery = lowerQuery.includes(pair[0]) ? pair[0] : pair[1];
             const altTerm = lowerQuery.includes(pair[0]) ? pair[1] : pair[0];
-            const altQuery = lowerQuery.replace(termInQuery, altTerm);
-            if (lowerText.includes(lowerQuery) || lowerText.includes(altQuery)) {
+            const altQuerySingle = lowerQuery.replace(termInQuery, altTerm);
+            if (lowerText.includes(altQuerySingle)) {
                 return true;
             }
         }
     }
-    return lowerText.includes(lowerQuery);
+    
+    return false;
 }
 
 // Client-Side Search Engine
