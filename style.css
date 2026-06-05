@@ -715,7 +715,7 @@ body.edit-mode .add-block-placeholder {
     
     .mobile-header-subtitle {
         font-family: var(--font-en), sans-serif;
-        font-size: 13.5px; /* Slightly reduced for better spacing on mobile viewports */
+        font-size: 15px; /* Restored to original size */
         font-weight: 400;
         color: var(--ap-white);
         letter-spacing: 2px;
@@ -730,17 +730,17 @@ body.edit-mode .add-block-placeholder {
     .mobile-actions {
         display: flex;
         align-items: center;
-        gap: 2px; /* Small gap between action buttons */
+        gap: 0px; /* Tightly pack action buttons */
     }
     
     .mobile-actions::before {
         content: "";
         display: block;
         width: 1px;
-        height: 12px;
-        background-color: rgba(0, 0, 0, 0.15); /* Thin gray vertical separator */
-        margin-right: 8px; /* Spacing between line and EN button */
-        margin-left: 2px; /* Spacing between BRAND GUIDELINE text and line */
+        height: 18px; /* Taller vertical separator line */
+        background-color: rgba(0, 0, 0, 0.2); /* Slightly darker gray line */
+        margin-right: 4px; /* Placed very close to the EN button */
+        margin-left: 0px; /* Left aligned */
     }
     
     .header-action-btn {
@@ -755,7 +755,7 @@ body.edit-mode .add-block-placeholder {
     }
     
     #header-search-toggle {
-        width: 28px; /* Reduced width from 34px for tighter spacing */
+        width: 22px; /* Reduced width for tighter spacing */
         height: 34px;
         border: none;
         background-color: transparent;
@@ -764,7 +764,7 @@ body.edit-mode .add-block-placeholder {
     }
     
     #header-lang-toggle-btn {
-        width: 28px; /* Reduced width from 34px for tighter spacing */
+        width: 22px; /* Reduced width for tighter spacing */
         height: 34px;
         border: none;
         background-color: transparent;
@@ -782,7 +782,7 @@ body.edit-mode .add-block-placeholder {
     }
     
     .hamburger-btn {
-        width: 28px; /* Reduced width from 34px for tighter spacing */
+        width: 22px; /* Reduced width for tighter spacing */
         height: 34px;
         display: flex;
         flex-direction: column;
