@@ -2452,3 +2452,10 @@ body.edit-mode .add-block-placeholder {
         width: 100% !important;
     }
 }
+
+/* Custom override for Slogan Exclusion Zone to use 1:2 layout ratio */
+@media (min-width: 901px) {
+    #block-block_slog_3 {
+        grid-template-columns: 1fr 2fr !important;
+    }
+}
