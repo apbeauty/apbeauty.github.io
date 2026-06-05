@@ -688,7 +688,7 @@ body.edit-mode .add-block-placeholder {
         left: 0;
         right: 0;
         background-color: #ffffff;
-        padding: 0 8px 0 16px; /* Aligned left padding with content area (16px), adjusted right padding for optical alignment of hamburger */
+        padding: 0 12px 0 16px; /* Aligned left padding with content area (16px), adjusted right padding (12px = 150% of 8px) for hamburger */
         z-index: 1005;
         margin-bottom: 0;
         margin-left: 0;
@@ -718,7 +718,7 @@ body.edit-mode .add-block-placeholder {
         font-size: 15px;
         font-weight: 400;
         color: var(--ap-white);
-        letter-spacing: 1.7px; /* Reduced letter-spacing to 85% (from 2px) */
+        letter-spacing: 1.5px; /* Reduced letter-spacing to 1.5px */
         line-height: 1;
         text-transform: uppercase;
         margin-bottom: 0;
@@ -730,7 +730,7 @@ body.edit-mode .add-block-placeholder {
     .mobile-actions {
         display: flex;
         align-items: center;
-        gap: 2px; /* Adjusted gap between buttons to 2px */
+        gap: 3px; /* Adjusted gap between buttons to 3px */
     }
     
     .mobile-actions::before {
