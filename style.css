@@ -851,7 +851,7 @@ body.edit-mode .add-block-placeholder {
         height: 34px;
         padding: 0 28px 0 28px; /* Left padding for icon, right padding for clear button */
         font-family: var(--font-en);
-        font-size: 0.625rem !important; /* Force override of the iOS 16px input rule */
+        font-size: 0.9375rem !important; /* ~15px, 1.5x larger than previous 10px */
         letter-spacing: 1px;
         border: 1px solid var(--ap-border);
         background: transparent;
