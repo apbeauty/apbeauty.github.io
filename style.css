@@ -730,16 +730,16 @@ body.edit-mode .add-block-placeholder {
     .mobile-actions {
         display: flex;
         align-items: center;
-        gap: 3px; /* Adjusted gap between buttons to 3px */
+        gap: 4px; /* Adjusted gap between buttons to 4px */
     }
     
     .mobile-actions::before {
         content: "";
         display: block;
         width: 1px;
-        height: 22px; /* Increased vertical separator height to 22px */
+        height: 24px; /* Increased vertical separator height to 24px */
         background-color: rgba(0, 0, 0, 0.2);
-        margin-right: 4px;
+        margin-right: 0px; /* Use flex gap (4px) for spacing to EN button */
         margin-left: 0px;
     }
     
@@ -843,7 +843,7 @@ body.edit-mode .add-block-placeholder {
     
     .mobile-dropdown-search-container {
         position: relative;
-        margin: 20px 24px 8px 24px;
+        margin: 10px 24px 4px 24px; /* Reduced margins by 50% */
     }
     
     .mobile-dropdown-search-input {
