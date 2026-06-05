@@ -133,6 +133,8 @@ function setupEventListeners() {
             });
             activeSectionId = '';
             updateActiveNavLink('', '');
+            // Clear search query
+            syncSearch('');
         });
     }
 
@@ -145,6 +147,8 @@ function setupEventListeners() {
             });
             activeSectionId = '';
             updateActiveNavLink('', '');
+            // Clear search query
+            syncSearch('');
             // Close mobile menu dropdown and overlay
             if (mobileMenuDropdown) mobileMenuDropdown.classList.remove('active');
             if (sidebarOverlay) sidebarOverlay.classList.remove('active');
