@@ -230,6 +230,26 @@ function setupEventListeners() {
         mobileDropdownSearch.addEventListener('click', (e) => {
             e.stopPropagation();
         });
+
+        // Close dropdown menu when pressing Enter key
+        mobileDropdownSearch.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                mobileDropdownSearch.blur(); // Hide virtual keyboard
+                
+                const mobileMenuDropdown = document.getElementById('mobile-menu-dropdown');
+                if (mobileMenuDropdown) {
+                    mobileMenuDropdown.classList.remove('active');
+                }
+                const sidebarOverlay = document.getElementById('sidebar-overlay');
+                if (sidebarOverlay) {
+                    sidebarOverlay.classList.remove('active');
+                }
+                const menuToggleBtn = document.getElementById('menu-toggle-btn');
+                if (menuToggleBtn) {
+                    menuToggleBtn.classList.remove('open');
+                }
+            }
+        });
     }
 
     if (searchClearBtn) {
