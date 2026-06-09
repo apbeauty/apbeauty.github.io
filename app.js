@@ -1131,10 +1131,10 @@ function renderBlockHTML(block, sectionId, index, totalBlocks) {
                 { name: 'Bold', val: '700', active: false }
             ];
             colData = [
-                { class: 'weight-light', title: 'Noto Sans KR Light', lines: ['가나다라마바사아자차카타파하', '갬냄댐램맴뱀샘앰잼챔캠탬팸햄', '0123456789!@#$%^&*()_+'] },
-                { class: 'weight-book', title: 'Noto Sans KR Regular', lines: ['가나다라마바사아자차카타파하', '갬냄댐램맴뱀샘앰잼챔캠탬팸햄', '0123456789!@#$%^&*()_+'] },
-                { class: 'weight-medium', title: 'Noto Sans KR Medium', lines: ['가나다라마바사아자차카타파하', '갬냄댐램맴뱀샘앰잼챔캠탬팸햄', '0123456789!@#$%^&*()_+'] },
-                { class: 'weight-bold', title: 'Noto Sans KR Bold', lines: ['가나다라마바사아자차카타파하', '갬냄댐램맴뱀샘앰잼챔캠탬팸햄', '0123456789!@#$%^&*()_+'] }
+                { class: 'weight-light', title: 'Noto Sans KR Light', lines: ['가나다라마바사아자차카타파하', '각낙닫랄맘밥삿앙잦찾캌탙팦핳', '0123456789!@#$%^&*()_+'] },
+                { class: 'weight-book', title: 'Noto Sans KR Regular', lines: ['가나다라마바사아자차카타파하', '각낙닫랄맘밥삿앙잦찾캌탙팦핳', '0123456789!@#$%^&*()_+'] },
+                { class: 'weight-medium', title: 'Noto Sans KR Medium', lines: ['가나다라마바사아자차카타파하', '각낙닫랄맘밥삿앙잦찾캌탙팦핳', '0123456789!@#$%^&*()_+'] },
+                { class: 'weight-bold', title: 'Noto Sans KR Bold', lines: ['가나다라마바사아자차카타파하', '각낙닫랄맘밥삿앙잦찾캌탙팦핳', '0123456789!@#$%^&*()_+'] }
             ];
         } else {
             fontFamily = "'Noto Sans SC', sans-serif";
@@ -1146,10 +1146,10 @@ function renderBlockHTML(block, sectionId, index, totalBlocks) {
                 { name: 'Bold', val: '700', active: false }
             ];
             colData = [
-                { class: 'weight-light', title: 'Noto Sans SC Light', lines: ['文则数言乃成其意家书一', '字可见心谓得简易之道欲', '0123456789!@#$%^&*()_+'] },
-                { class: 'weight-book', title: 'Noto Sans SC Regular', lines: ['文则数言乃成其意家书一', '字可见心谓得简易之道欲', '0123456789!@#$%^&*()_+'] },
-                { class: 'weight-medium', title: 'Noto Sans SC Medium', lines: ['文则数言乃成其意家书一', '字可见心谓得简易之道欲', '0123456789!@#$%^&*()_+'] },
-                { class: 'weight-bold', title: 'Noto Sans SC Bold', lines: ['文则数言乃成其意家书一', '字可见心谓得简易之道欲', '0123456789!@#$%^&*()_+'] }
+                { class: 'weight-light', title: 'Noto Sans SC Light', lines: ['天地玄黃宇宙洪荒', '日月盈昃辰宿列張', '0123456789!@#$%^&*()_+'] },
+                { class: 'weight-book', title: 'Noto Sans SC Regular', lines: ['天地玄黃宇宙洪荒', '日月盈昃辰宿列張', '0123456789!@#$%^&*()_+'] },
+                { class: 'weight-medium', title: 'Noto Sans SC Medium', lines: ['天地玄黃宇宙洪荒', '日月盈昃辰宿列張', '0123456789!@#$%^&*()_+'] },
+                { class: 'weight-bold', title: 'Noto Sans SC Bold', lines: ['天地玄黃宇宙洪荒', '日月盈昃辰宿列張', '0123456789!@#$%^&*()_+'] }
             ];
         }
 
