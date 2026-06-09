@@ -2279,7 +2279,15 @@ function handleSearch(query) {
             const titleMatches = checkMatch(titleText, query);
             const contentMatches = checkMatch(contentText, query);
             
-            if (titleMatches || contentMatches || sectionMatchesTitle) {
+            // Check if block is downloadable and matches download keywords
+            const isDownloadable = blk.querySelector('a[download]') !== null;
+            const downloadMatches = isDownloadable && (
+                checkMatch('download', query) || 
+                checkMatch('다운로드', query) || 
+                checkMatch('다운', query)
+            );
+            
+            if (titleMatches || contentMatches || sectionMatchesTitle || downloadMatches) {
                 blk.style.display = ''; // Show block
                 sectionMatchesCount++;
                 totalMatches++;
