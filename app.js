@@ -1100,7 +1100,7 @@ function renderBlockHTML(block, sectionId, index, totalBlocks) {
     }
 
     let visualContent = '';
-    if (block.id === 'block_tf_1' || block.id === 'block_tf_2' || block.id === 'block_tf_3') {
+    if (block.id === 'block_tf_1' || block.id === 'block_tf_4' || block.id === 'block_tf_2' || block.id === 'block_tf_3') {
         let fontFamily = '';
         let defaultText = '';
         let weights = [];
@@ -1120,6 +1120,17 @@ function renderBlockHTML(block, sectionId, index, totalBlocks) {
                 { class: 'weight-book', title: 'Futura PT Book', lines: ['ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz', '1234567890!@#$%^&*()_+'] },
                 { class: 'weight-medium', title: 'Futura PT Medium', lines: ['ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz', '1234567890!@#$%^&*()_+'] },
                 { class: 'weight-demi', title: 'Futura PT Demi', lines: ['ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz', '1234567890!@#$%^&*()_+'] }
+            ];
+        } else if (block.id === 'block_tf_4') {
+            fontFamily = "'futura-pt', sans-serif";
+            defaultText = 'APEX OF SKINCARE TO UNVEIL BEAUTY BEYOND';
+            weights = [
+                { name: 'Regular', val: '300', active: true },
+                { name: 'Bold', val: '500', active: false }
+            ];
+            colData = [
+                { class: 'weight-light', title: 'APHQ Regular', lines: ['ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz', '1234567890!@#$%^&*()_+'] },
+                { class: 'weight-medium', title: 'APHQ Bold', lines: ['ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz', '1234567890!@#$%^&*()_+'] }
             ];
         } else if (block.id === 'block_tf_2') {
             fontFamily = "'Noto Sans KR', sans-serif";

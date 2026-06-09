@@ -199,6 +199,15 @@ window.guidelineData = {
           "image": ""
         },
         {
+          "id": "block_tf_4",
+          "type": "text",
+          "title": "ENGLISH TYPOGRAPHY | APHQ",
+          "title_en": "ENGLISH TYPOGRAPHY | APHQ",
+          "content": "지정 서체는 브랜드 이미지를 일관되게 유지하고 다른 브랜드 요소와 조화롭게 구성하기 위해 선정된 서체입니다. 브랜드 이미지를 전달하는 헤드라인, 타이틀, 핵심 문구 등 주요 텍스트에 사용하며, 적용 항목의 성격에 따라 적절한 두께를 선택하여 사용할 수 있습니다.",
+          "content_en": "The designated typography is selected to maintain a consistent brand image and harmonize with other brand identity elements. It is used for primary text such as headlines, titles, and key statements, and appropriate font weights can be selected based on the media context.",
+          "image": ""
+        },
+        {
           "id": "block_tf_2",
           "type": "text",
           "title": "KOREAN TYPOGRAPHY | Noto Sans KR",

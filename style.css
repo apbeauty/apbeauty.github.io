@@ -1681,6 +1681,16 @@ body.edit-mode .add-block-placeholder {
     top: 5% !important;
 }
 
+#block-block_tf_4 .visual-image-svg-box {
+    aspect-ratio: 1.653 !important;
+}
+#block-block_tf_4 .visual-image-svg-box img {
+    width: 90% !important;
+    height: 90% !important;
+    left: 5% !important;
+    top: 5% !important;
+}
+
 #block-block_tf_2 .visual-image-svg-box {
     aspect-ratio: 1.451 !important;
 }
