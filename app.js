@@ -462,6 +462,8 @@ function renderSidebar() {
             });
             
             section.blocks.forEach(block => {
+                if (block.id === 'block_tf_4') return; // Skip APHQ block in submenu to avoid duplicate English Typography link
+                
                 const subLink = document.createElement('a');
                 subLink.href = `#block-${block.id}`;
                 subLink.className = 'nav-sub-link';
@@ -639,10 +641,11 @@ function updateActiveNavLink(sectionId, activeBlockId) {
             submenu.classList.add('expanded');
             
             const subLinks = submenu.querySelectorAll('.nav-sub-link');
-            subLinks.forEach(subLink => {
-                if (activeBlockId && subLink.getAttribute('href') === `#block-${activeBlockId}`) {
+            subLinks.forEach((subLink, idx) => {
+                const targetBlockId = activeBlockId === 'block_tf_4' ? 'block_tf_1' : activeBlockId;
+                if (targetBlockId && subLink.getAttribute('href') === `#block-${targetBlockId}`) {
                     subLink.classList.add('active');
-                } else if (!activeBlockId && subLink === subLinks[0]) {
+                } else if (!targetBlockId && idx === 0) {
                     subLink.classList.add('active'); // fallback to first item
                 } else {
                     subLink.classList.remove('active');
