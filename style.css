@@ -326,7 +326,7 @@ body {
 .guide-block {
     position: relative;
     display: grid;
-    grid-template-columns: 3fr 7fr;
+    grid-template-columns: minmax(0, 3fr) minmax(0, 7fr);
     gap: 72px;
     padding: 70.2px 0;
     transition: var(--transition-smooth);
@@ -1384,6 +1384,8 @@ body.edit-mode .add-block-placeholder {
     line-height: 1.45;
     letter-spacing: 0.5px;
     opacity: 0.8;
+    word-break: break-all;
+    overflow-wrap: break-word;
 }
 
 .typeface-col-content .alphabet-row {
