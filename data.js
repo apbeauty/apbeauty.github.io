@@ -130,18 +130,18 @@ window.guidelineData = {
     },
     {
       "id": "slogan",
-      "title": "AP SLOGAN",
-      "title_en": "AP SLOGAN",
+      "title": "SLOGAN",
+      "title_en": "SLOGAN",
       "description": "AP BEAUTY의 가치관과 비전을 드러내는 슬로건 규정입니다. 지정된 폰트 패밀리와 스타일 및 간격 규정을 사용해야 합니다.",
       "description_en": "Regulations for the AP BEAUTY brand slogan, expressing its brand values and vision. The designated font family, style, and tracking regulations must be strictly applied.",
       "blocks": [
         {
           "id": "block_slog_1",
           "type": "text",
-          "title": "AP SLOGAN",
-          "title_en": "AP SLOGAN",
-          "content": "AP SLOGAN은 브랜드 철학과 비전을 함축적으로 전달하는 핵심 커뮤니케이션 요소입니다. 브랜드의 일관된 이미지를 유지하기 위해 규정된 형태와 기준에 따라 사용해야 하며, 임의의 수정이나 변형은 허용되지 않습니다.",
-          "content_en": "The AP SLOGAN is a key communication element that conveys the brand's philosophy and vision. To maintain a consistent brand image, it must be used in accordance with the specified guidelines, and arbitrary modifications or revisions are not allowed.",
+          "title": "SLOGAN",
+          "title_en": "SLOGAN",
+          "content": "SLOGAN은 브랜드 철학과 비전을 함축적으로 전달하는 핵심 커뮤니케이션 요소입니다. 브랜드의 일관된 이미지를 유지하기 위해 규정된 형태와 기준에 따라 사용해야 하며, 임의의 수정이나 변형은 허용되지 않습니다.",
+          "content_en": "The SLOGAN is a key communication element that conveys the brand's philosophy and vision. To maintain a consistent brand image, it must be used in accordance with the specified guidelines, and arbitrary modifications or revisions are not allowed.",
           "image": ""
         },
         {
@@ -149,8 +149,8 @@ window.guidelineData = {
           "type": "text",
           "title": "Structure",
           "title_en": "Structure",
-          "content": "AP SLOGAN은 브랜드 메시지의 일관성과 가독성을 유지하기 위해 지정된 서체, 자간 및 비례 규정을 준수하여 사용합니다. 슬로건의 구성 요소 간 관계는 변경할 수 없으며, 원본 데이터를 기준으로 정비례 확대·축소하여 사용합니다.",
-          "content_en": "The AP SLOGAN must be applied using the designated typeface, tracking, and proportion guidelines to maintain brand message consistency and readability. The relationship between the components cannot be altered, and any scaling must be proportional based on original digital data.",
+          "content": "SLOGAN은 브랜드 메시지의 일관성과 가독성을 유지하기 위해 지정된 서체, 자간 및 비례 규정을 준수하여 사용합니다. 슬로건의 구성 요소 간 관계는 변경할 수 없으며, 원본 데이터를 기준으로 정비례 확대·축소하여 사용합니다.",
+          "content_en": "The SLOGAN must be applied using the designated typeface, tracking, and proportion guidelines to maintain brand message consistency and readability. The relationship between the components cannot be altered, and any scaling must be proportional based on original digital data.",
           "image": ""
         },
         {
@@ -158,8 +158,8 @@ window.guidelineData = {
           "type": "text",
           "title": "Exclusion Zone",
           "title_en": "Exclusion Zone",
-          "content": "AP SLOGAN은 명확한 가독성과 시인성을 확보하기 위해 주변 요소로부터 충분한 독립 공간을 유지해야 합니다. 규정된 최소 여백 내에는 어떠한 텍스트나 그래픽 요소도 침범할 수 없습니다.",
-          "content_en": "The AP SLOGAN must maintain a clear, independent space from surrounding elements to ensure legibility and visibility. No textual or graphical components may encroach within the defined minimum exclusion zone.",
+          "content": "SLOGAN은 명확한 가독성과 시인성을 확보하기 위해 주변 요소로부터 충분한 독립 공간을 유지해야 합니다. 규정된 최소 여백 내에는 어떠한 텍스트나 그래픽 요소도 침범할 수 없습니다.",
+          "content_en": "The SLOGAN must maintain a clear, independent space from surrounding elements to ensure legibility and visibility. No textual or graphical components may encroach within the defined minimum exclusion zone.",
           "image": ""
         }
       ]
