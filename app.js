@@ -697,11 +697,11 @@ function renderAllSections() {
         setupInteractiveWordmarkControls(idSuffix);
     });
 
-    // Initialize interactive typeface tester controls
+    // Initialize interactive typography tester controls
     const sizeSliders = document.querySelectorAll('[id^="tester-font-size-slider-"]');
     sizeSliders.forEach(slider => {
         const idSuffix = slider.id.replace('tester-font-size-slider-', ''); // e.g. "block_tf_1"
-        setupTypefaceTesterControls(idSuffix);
+        setupTypographyTesterControls(idSuffix);
     });
 }
 
@@ -817,8 +817,8 @@ function adjustLayoutForViewport(suffix = '') {
     // Spacing and layout are now managed entirely by CSS media queries
 }
 
-// Bind event listeners for interactive typeface testers (en, ko, zh)
-function setupTypefaceTesterControls(suffix) {
+// Bind event listeners for interactive typography testers (en, ko, zh)
+function setupTypographyTesterControls(suffix) {
     const slider = document.getElementById('tester-font-size-slider-' + suffix);
     const label = document.getElementById('tester-size-label-' + suffix);
     const fill = document.getElementById('tester-slider-track-fill-' + suffix);
@@ -1154,7 +1154,7 @@ function renderBlockHTML(block, sectionId, index, totalBlocks) {
         }
 
         visualContent = `
-            <div class="visual-image-frame typeface-showcase-box" style="cursor: default; --font-en: ${fontFamily};">
+            <div class="visual-image-frame typography-showcase-box" style="cursor: default; --font-en: ${fontFamily};">
                 <!-- Type Tester Panel -->
                 <div class="type-tester-panel" id="tester-panel-${block.id}">
                     <div class="tester-controls-bar">
@@ -1203,11 +1203,11 @@ function renderBlockHTML(block, sectionId, index, totalBlocks) {
                     </div>
                 </div>
                 
-                <div class="typeface-grid">
+                <div class="typography-grid">
                     ${colData.map(col => `
-                        <div class="typeface-col ${col.class}">
-                            <div class="typeface-col-title">${col.title}</div>
-                            <div class="typeface-col-content">
+                        <div class="typography-col ${col.class}">
+                            <div class="typography-col-title">${col.title}</div>
+                            <div class="typography-col-content">
                                 ${col.lines.map((l, i) => i === col.lines.length - 1 ? `<div>${l}</div>` : `<div class="alphabet-row">${l}</div>`).join('')}
                             </div>
                         </div>
@@ -2154,13 +2154,18 @@ function checkMatch(text, query) {
         ['download', '다운'],
         ['color', '색상'],
         ['color', '컬러'],
+        ['typography', '타이포그래피'],
+        ['typography', '서체'],
+        ['typography', '폰트'],
+        ['typography', '글꼴'],
         ['typeface', '서체'],
         ['typeface', '폰트'],
         ['typeface', '글꼴'],
+        ['font', 'typography'],
+        ['font', 'typeface'],
         ['font', '서체'],
         ['font', '폰트'],
         ['font', '글꼴'],
-        ['font', 'typeface'],
         ['futura', '푸투라'],
         ['noto', '노토'],
         ['sans', '산스'],

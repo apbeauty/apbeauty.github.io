@@ -1083,8 +1083,8 @@ body.edit-mode .add-block-placeholder {
     margin: 0 4px;
 }
 
-/* Typeface Showcase Layout (Interactive Type Tester & Specimen Grid) */
-.typeface-showcase-box {
+/* Typography Showcase Layout (Interactive Type Tester & Specimen Grid) */
+.typography-showcase-box {
     background-color: transparent !important;
     border: none !important;
     padding: 0 !important;
@@ -1351,14 +1351,14 @@ body.edit-mode .add-block-placeholder {
 }
 
 /* Responsive columns map */
-.typeface-divider {
+.typography-divider {
     width: 100%;
     height: 1px;
     background-color: var(--ap-border);
     margin: 8px 0 4px 0;
 }
 
-.typeface-grid {
+.typography-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 24px;
@@ -1366,20 +1366,20 @@ body.edit-mode .add-block-placeholder {
     margin-top: 16px;
 }
 
-.typeface-col {
+.typography-col {
     display: flex;
     flex-direction: column;
     font-family: var(--font-en);
     color: #02060F;
 }
 
-.typeface-col-title {
+.typography-col-title {
     font-size: 1.15rem;
     margin-bottom: 12px;
     letter-spacing: 0.5px;
 }
 
-.typeface-col-content {
+.typography-col-content {
     font-size: 0.8rem;
     line-height: 1.45;
     letter-spacing: 0.5px;
@@ -1388,25 +1388,25 @@ body.edit-mode .add-block-placeholder {
     overflow-wrap: break-word;
 }
 
-.typeface-col-content .alphabet-row {
+.typography-col-content .alphabet-row {
     margin-bottom: 6px;
 }
 
 /* Weight variations */
-.typeface-col.weight-light { font-weight: 300; }
-.typeface-col.weight-light .typeface-col-title { font-weight: 300; }
+.typography-col.weight-light { font-weight: 300; }
+.typography-col.weight-light .typography-col-title { font-weight: 300; }
 
-.typeface-col.weight-book { font-weight: 400; }
-.typeface-col.weight-book .typeface-col-title { font-weight: 400; }
+.typography-col.weight-book { font-weight: 400; }
+.typography-col.weight-book .typography-col-title { font-weight: 400; }
 
-.typeface-col.weight-medium { font-weight: 500; }
-.typeface-col.weight-medium .typeface-col-title { font-weight: 500; }
+.typography-col.weight-medium { font-weight: 500; }
+.typography-col.weight-medium .typography-col-title { font-weight: 500; }
 
-.typeface-col.weight-demi { font-weight: 600; }
-.typeface-col.weight-demi .typeface-col-title { font-weight: 600; }
+.typography-col.weight-demi { font-weight: 600; }
+.typography-col.weight-demi .typography-col-title { font-weight: 600; }
 
-.typeface-col.weight-bold { font-weight: 700; }
-.typeface-col.weight-bold .typeface-col-title { font-weight: 700; }
+.typography-col.weight-bold { font-weight: 700; }
+.typography-col.weight-bold .typography-col-title { font-weight: 700; }
 
 /* Responsive adjustments */
 @media (max-width: 900px) {
@@ -1421,10 +1421,10 @@ body.edit-mode .add-block-placeholder {
         padding: 32px 20px;
         min-height: 140px;
     }
-    .typeface-showcase-box {
+    .typography-showcase-box {
         padding: 0 !important;
     }
-    .typeface-grid {
+    .typography-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 20px;
     }
@@ -1445,15 +1445,15 @@ body.edit-mode .add-block-placeholder {
 }
 
 @media (max-width: 480px) {
-    .typeface-grid {
+    .typography-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 20px 12px;
     }
-    .typeface-col-title {
+    .typography-col-title {
         font-size: 0.95rem !important;
         margin-bottom: 8px !important;
     }
-    .typeface-col-content {
+    .typography-col-content {
         font-size: 0.65rem !important;
         line-height: 1.4 !important;
     }

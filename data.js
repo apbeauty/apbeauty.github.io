@@ -150,7 +150,7 @@ window.guidelineData = {
           "title": "Structure",
           "title_en": "Structure",
           "content": "SLOGAN은 브랜드 메시지의 일관성과 가독성을 유지하기 위해 지정된 서체, 자간 및 비례 규정을 준수하여 사용합니다. 슬로건의 구성 요소 간 관계는 변경할 수 없으며, 원본 데이터를 기준으로 정비례 확대·축소하여 사용합니다.",
-          "content_en": "The SLOGAN must be applied using the designated typeface, tracking, and proportion guidelines to maintain brand message consistency and readability. The relationship between the components cannot be altered, and any scaling must be proportional based on original digital data.",
+          "content_en": "The SLOGAN must be applied using the designated typography, tracking, and proportion guidelines to maintain brand message consistency and readability. The relationship between the components cannot be altered, and any scaling must be proportional based on original digital data.",
           "image": ""
         },
         {
@@ -183,37 +183,37 @@ window.guidelineData = {
       ]
     },
     {
-      "id": "typeface",
-      "title": "TYPEFACE",
-      "title_en": "TYPEFACE",
+      "id": "typography",
+      "title": "TYPOGRAPHY",
+      "title_en": "TYPOGRAPHY",
       "description": "AP BEAUTY에 적용하는 전용 서체 가이드라인입니다. 영문 헤드라인은 Futura PT를 기본으로 하며 국문은 Noto Sans KR을 표준으로 삼아 가독성을 최우선으로 고려합니다.",
       "description_en": "Typography guidelines applied to AP BEAUTY. The English headline is based on Futura PT, and the Korean body copy uses Noto Sans KR as standard, prioritizing legibility above all.",
       "blocks": [
         {
           "id": "block_tf_1",
           "type": "text",
-          "title": "ENGLISH TYPEFACE | Futura PT",
-          "title_en": "ENGLISH TYPEFACE | Futura PT",
+          "title": "ENGLISH TYPOGRAPHY | Futura PT",
+          "title_en": "ENGLISH TYPOGRAPHY | Futura PT",
           "content": "지정 서체는 브랜드 이미지를 일관되게 유지하고 다른 브랜드 요소와 조화롭게 구성하기 위해 선정된 서체입니다. 브랜드 이미지를 전달하는 헤드라인, 타이틀, 핵심 문구 등 주요 텍스트에 사용하며, 적용 항목의 성격에 따라 적절한 두께를 선택하여 사용할 수 있습니다.",
-          "content_en": "The designated typeface is selected to maintain a consistent brand image and harmonize with other brand identity elements. It is used for primary text such as headlines, titles, and key statements, and appropriate font weights can be selected based on the media context.",
+          "content_en": "The designated typography is selected to maintain a consistent brand image and harmonize with other brand identity elements. It is used for primary text such as headlines, titles, and key statements, and appropriate font weights can be selected based on the media context.",
           "image": ""
         },
         {
           "id": "block_tf_2",
           "type": "text",
-          "title": "KOREAN TYPEFACE | Noto Sans KR",
-          "title_en": "KOREAN TYPEFACE | Noto Sans KR",
+          "title": "KOREAN TYPOGRAPHY | Noto Sans KR",
+          "title_en": "KOREAN TYPOGRAPHY | Noto Sans KR",
           "content": "지정 서체는 브랜드 이미지를 일관되게 유지하고 다른 브랜드 요소와 조화롭게 구성하기 위해 선정된 서체입니다. 가독성이 요구되는 각종 시각 전달 매체의 본문 및 문안에 사용하며, 적용 항목의 성격에 따라 적절한 두께를 선택하여 사용할 수 있습니다.",
-          "content_en": "The designated typeface is selected to maintain a consistent brand image and harmonize with other brand identity elements. It is applied to body copy and textual descriptions across various visual media where readability is paramount, and appropriate weights can be selected based on application needs.",
+          "content_en": "The designated typography is selected to maintain a consistent brand image and harmonize with other brand identity elements. It is applied to body copy and textual descriptions across various visual media where readability is paramount, and appropriate weights can be selected based on application needs.",
           "image": ""
         },
         {
           "id": "block_tf_3",
           "type": "text",
-          "title": "CHINESE TYPEFACE | Noto Sans SC",
-          "title_en": "CHINESE TYPEFACE | Noto Sans SC",
+          "title": "CHINESE TYPOGRAPHY | Noto Sans SC",
+          "title_en": "CHINESE TYPOGRAPHY | Noto Sans SC",
           "content": "지정 서체는 브랜드 이미지를 일관되게 유지하고 다른 브랜드 요소와 조화롭게 구성하기 위해 선정된 서체입니다. 가독성이 요구되는 각종 시각 전달 매체의 본문 및 문안에 사용하며, 적용 항목의 성격에 따라 적절한 두께를 선택하여 사용할 수 있습니다.",
-          "content_en": "The designated typeface is selected to maintain a consistent brand image and harmonize with other brand identity elements. It is applied to body copy and textual descriptions across various visual media where readability is paramount, and appropriate weights can be selected based on application needs.",
+          "content_en": "The designated typography is selected to maintain a consistent brand image and harmonize with other brand identity elements. It is applied to body copy and textual descriptions across various visual media where readability is paramount, and appropriate weights can be selected based on application needs.",
           "image": ""
         }
       ]
